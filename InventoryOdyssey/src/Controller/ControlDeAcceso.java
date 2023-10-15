@@ -3,25 +3,26 @@ package Controller;
 import Classes.Usuario;
 
 public class ControlDeAcceso {
-    Boolean activo = false;
 
     public ControlDeAcceso() {
-        this.activo = false;
     }
 
     //Methods
-    public boolean login(Usuario user){
-        //Aca ira el metodo de comprobación por ahora va un true por defecto
-        boolean confirmacion = true;
-        if(confirmacion==true){
-            activo = true;
+    public boolean login(String name, String password){
+        Usuario usuario = new Usuario(name, password);
+        Usuario usuarioPrueba = new Usuario("Santiago","Karen");//Esta parte traera los usuarios de la base de datos.
+        if((usuario.getNombre_usuario().equals(usuarioPrueba.getNombre_usuario())) && (usuario.getPassword().equals(usuarioPrueba.getPassword()))) {
             return true;
         }else {
             return false;
         }
     }
+    public int rol(){
+        Usuario usuarioPrueba = new Usuario("Santiago","Karen",1);//prueba sin modelo
+        return usuarioPrueba.getTipoUsuario();
+    }
     public boolean logout(){
-        activo = false;
         return true;
     }
+    //aca tendrá la encriptación y desencriptación
 }

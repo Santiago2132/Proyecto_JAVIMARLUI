@@ -8,6 +8,9 @@ public class Proveedor {
     public LinkedList historial;
     public LinkedList catalogo;
 
+    public Proveedor() {
+    }
+
     public Proveedor(String nombreEmpresa, int nit, LinkedList historial, LinkedList catalogo) {
         this.nombreEmpresa = nombreEmpresa;
         this.nit = nit;

@@ -6,8 +6,7 @@ public class Usuario extends Persona{
     public int tipoUsuario = 0;
     public String nombre_usuario = null;
     private String password = null;
-
-
+    public int ventas;
     public Usuario() {
     }
     public Usuario(String nombre, String contraseña){
@@ -19,11 +18,28 @@ public class Usuario extends Persona{
         password = contraseña;
         tipoUsuario = rol;
     }
-    public Usuario(String nombre, int indetificacion, int telefono, Date edad, String correo, String direccion, int tipoUsuario, String nombre_usuario, String password) {
+
+    public Usuario(int tipoUsuario, String nombre_usuario, String password, int ventas) {
+        this.tipoUsuario = tipoUsuario;
+        this.nombre_usuario = nombre_usuario;
+        this.password = password;
+        this.ventas = ventas;
+    }
+
+    public Usuario(String nombre, int indetificacion, int telefono, Date edad, String correo, String direccion, int tipoUsuario, String nombre_usuario, String password, int ventas) {
         super(nombre, indetificacion, telefono, edad, correo, direccion);
         this.tipoUsuario = tipoUsuario;
         this.nombre_usuario = nombre_usuario;
         this.password = password;
+        this.ventas = ventas;
+    }
+
+    public int getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(int ventas) {
+        this.ventas = ventas;
     }
 
     public int getTipoUsuario() {//Getters and Setters

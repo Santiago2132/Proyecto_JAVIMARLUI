@@ -6,6 +6,10 @@ import java.util.List;
 public class Inventario {
     private List<Producto> productos = new ArrayList<>();
 
+    public Inventario(List<Producto> productos) {
+        this.productos = productos;
+    }
+
     public void agregarProducto(Producto producto) {
         productos.add(producto);
     }

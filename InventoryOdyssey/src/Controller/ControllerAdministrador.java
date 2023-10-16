@@ -4,8 +4,7 @@ import Classes.Usuario;
 import Structures.LinkedList;
 
 public class ControllerAdministrador {
-    //Funciones de creación faltan
-    public boolean crearUsuario(){
+    public boolean crearUsuario(){//Funciones con usuarios
         boolean creado = false;
         return creado;
     }
@@ -15,11 +14,17 @@ public class ControllerAdministrador {
     public Usuario consultaUsuario(){
         return null;
     }
-    public LinkedList estadoInventario(){
+    public LinkedList estadoInventario(){//Inventario y Producto
         return null;
     }
-    public boolean crearFactura(){
+    public boolean crearFactura(){//Factura
          return false;
+    }
+    public boolean cambiarAtributos(){
+        return false;
+    }
+    public boolean agregarCliente(){//Metodos con clientes
+        return false;
     }
 
     //Funciones de consulta

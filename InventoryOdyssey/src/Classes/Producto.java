@@ -11,6 +11,20 @@ public class Producto {
     int garantiaMeses = 0; //Depende del producto
     int cantidad = 0;
 
+    public Producto() {
+    }
+
+    public Producto(int idProducto, String nombre, double precioCosto, double precioVenta, float procentajeIva, String descripcion, int garantiaMeses, int cantidad) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.precioCosto = precioCosto;
+        this.precioVenta = precioVenta;
+        this.procentajeIva = procentajeIva;
+        this.descripcion = descripcion;
+        this.garantiaMeses = garantiaMeses;
+        this.cantidad = cantidad;
+    }
+
     public int getIdProducto() {
         return idProducto;
     }

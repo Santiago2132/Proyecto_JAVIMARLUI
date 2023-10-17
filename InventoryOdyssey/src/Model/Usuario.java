@@ -25,7 +25,7 @@ public class Usuario {
         int resultado = 0;
         Connection conexion = null;
         //String query = "INSERT INTO USUARIO (ID_USUARIO, INVENTARIO_ID_INVENTARIO, NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        String query = "INSERT INTO USUARIO (NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO USUARIO (NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?)";
         try{
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
@@ -120,8 +120,8 @@ public class Usuario {
     public static void main(String[] args) {
         Usuario usuario = new Usuario();
         int resultadoAgregar = usuario.agregarUsuario("Patricia", "patty", "patty", "correo@example.com", 1);
-        int resultadoEliminar = usuario.eliminarUsuarioPorNombreCompleto("Patricia");
-        int resultadoModificar = usuario.modificarUsuario("Patricia", "Patty", "Patty", "patricia@gmail.com", 1);
-        boolean usuarioValido = usuario.validarUsuario("Patty", "Patty");
+        //int resultadoEliminar = usuario.eliminarUsuarioPorNombreCompleto("Patricia");
+        //int resultadoModificar = usuario.modificarUsuario("Patricia", "Patty", "Patty", "patricia@gmail.com", 1);
+        //boolean usuarioValido = usuario.validarUsuario("Patty", "Patty");
     }
 }

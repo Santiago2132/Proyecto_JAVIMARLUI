@@ -14,15 +14,24 @@ public class ControllerAdministrador {
     public Usuario consultaUsuario(){
         return null;
     }
+    public boolean modificarUsuario(){
+        return false;
+    }
     public LinkedList estadoInventario(){//Inventario y Producto
         return null;
     }
     public boolean crearFactura(){//Factura
          return false;
     }
-    public boolean cambiarAtributos(){
+    public boolean eliminarFactura(){
         return false;
     }
+    public boolean modificarFactura(){
+        return false;
+    }
+    public boolean cambiarAtributos(){
+        return false;
+    }//Clientes
     public boolean agregarCliente(){//Metodos con clientes
         return false;
     }

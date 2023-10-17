@@ -18,6 +18,12 @@ public class Usuario extends Persona{
         password = contraseña;
         tipoUsuario = rol;
     }
+    public Usuario(String nombre, String contraseña,String correo,int rol){
+        setCorreo(correo);
+        nombre_usuario = nombre;
+        password = contraseña;
+        tipoUsuario = rol;
+    }
 
     public Usuario(int tipoUsuario, String nombre_usuario, String password, int ventas) {
         this.tipoUsuario = tipoUsuario;

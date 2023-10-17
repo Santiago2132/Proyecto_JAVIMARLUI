@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -20,5 +21,7 @@
 =======
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
 >>>>>>> santiago
+=======
+>>>>>>> main
   </component>
 </module>

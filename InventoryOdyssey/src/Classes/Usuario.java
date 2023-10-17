@@ -25,6 +25,13 @@ public class Usuario extends Persona{
         this.password = password;
         this.ventas = ventas;
     }
+    public Usuario(String nombre, int telefono, Date edad, String correo, String direccion, int tipoUsuario, String nombre_usuario, String password, int ventas) {
+        super(nombre, telefono, edad, correo, direccion);
+        this.tipoUsuario = tipoUsuario;
+        this.nombre_usuario = nombre_usuario;
+        this.password = password;
+        this.ventas = ventas;
+    }
 
     public Usuario(String nombre, int indetificacion, int telefono, Date edad, String correo, String direccion, int tipoUsuario, String nombre_usuario, String password, int ventas) {
         super(nombre, indetificacion, telefono, edad, correo, direccion);

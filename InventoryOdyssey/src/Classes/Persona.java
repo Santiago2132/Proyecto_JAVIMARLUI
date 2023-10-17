@@ -12,7 +12,13 @@ public class Persona {
 
     public Persona() {//Constructores
     }
-
+    public Persona(String nombre, int telefono, Date edad, String correo, String direccion) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.edad = edad;
+        this.correo = correo;
+        this.direccion = direccion;
+    }
     public Persona(String nombre, int indetificacion, int telefono, Date edad, String correo, String direccion) {
         this.nombre = nombre;
         this.indetificacion = indetificacion;

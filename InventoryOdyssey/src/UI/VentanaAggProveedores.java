@@ -1,5 +1,9 @@
 package UI;
 
+<<<<<<< HEAD
+=======
+import Controller.ControllerCliente;
+>>>>>>> c7ac3e004a71ac9b270780fb95dff2c063f3fbc5
 import Controller.ControllerProveedor;
 
 import javax.swing.*;
@@ -80,6 +84,8 @@ public class VentanaAggProveedores extends JFrame{
 
     public void panelInformacionProveedor(){
 
+        ControllerProveedor controllerProveedor = new ControllerProveedor();
+
 
         JLabel imagen = new JLabel();
         ImageIcon image = new ImageIcon(getClass().getResource("/Imagenes/mujer.png"));
@@ -154,6 +160,8 @@ public class VentanaAggProveedores extends JFrame{
         cajaTipo.setBounds(375,430,220,30);
         informacionProveedor.add(cajaTipo);
 
+
+
         JLabel correoCliente = new JLabel("Correo:");
         correoCliente.setFont(new Font("Rockwell",Font.BOLD,20));
         correoCliente.setBounds(120,490,150,20);
@@ -164,8 +172,8 @@ public class VentanaAggProveedores extends JFrame{
         cajaCliente.setBounds(375,490,220,30);
         informacionProveedor.add(cajaCliente);
 
-        JButton botonAgregar =  new JButton("Agregar Proveedor");
-        botonAgregar.setBounds(995,525,180,50);
+        JButton botonAgregar = new JButton("Agregar Proveedor");
+        botonAgregar.setBounds(995, 525, 180, 50);
         botonAgregar.setBackground(Color.white);
         informacionProveedor.add(botonAgregar);
 
@@ -179,7 +187,11 @@ public class VentanaAggProveedores extends JFrame{
                 int nitEmpresa = Integer.parseInt(cajaDireccion.getText()); // Asumiendo que nitEmpresa es un número
                 int tipo = Integer.parseInt(cajaTipo.getText()); // Asumiendo que tipo es un número
                 String email = cajaCliente.getText();
+<<<<<<< HEAD
                 controllerProveedor.crearProveedor(nombre,nombreEmpresa,nitEmpresa,telefono,email,tipo);
+=======
+                
+>>>>>>> c7ac3e004a71ac9b270780fb95dff2c063f3fbc5
                 // Limpiar los campos de entrada
                 cajaNombre.setText("");
                 cajaId.setText("");

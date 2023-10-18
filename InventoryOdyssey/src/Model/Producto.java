@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.JOptionPane;
@@ -75,6 +77,7 @@ public class Producto {
         }
         return resultado;
     }
+
     //metodo para modificar el producto por precio y el iva, pero que el iva sea opcional si el usuario lo desea
     public int modificarProducto(int idProducto, double nuevoPrecio, Double nuevoIva) {
         int resultado = 0;
@@ -110,12 +113,14 @@ public class Producto {
         return resultado;
     }
 
+
+
     public static void main (String[] args) throws IOException, SQLException {
         String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
         Blob imagen = obtenerImagen(rutaImagen);
         Producto producto = new Producto();
         int resultadoAgregar = producto.agregarProducto(19.99, imagen, 0.19);
         //int resultadoEliminar = producto.eliminarProducto(1);
-        int resultadoModificar = producto.modificarProducto(1, 20.00, 0.19);
+       // int resultadoModificar = producto.modificarProducto(1, 20.00, 0.19);
     }
 }

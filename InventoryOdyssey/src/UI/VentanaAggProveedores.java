@@ -151,10 +151,30 @@ public class VentanaAggProveedores extends JFrame{
         tipoProv.setBounds(120,430,150,20);
         tipoProv.setForeground(Color.BLACK);
         informacionProveedor.add(tipoProv);
-
+        /*
         JTextField cajaTipo = new JTextField();
         cajaTipo.setBounds(375,430,220,30);
         informacionProveedor.add(cajaTipo);
+
+         */
+
+        String[] opciones = {"Mayorista", "Minorista"};
+        JComboBox<String> tipoProveedor = new JComboBox<>(opciones);
+        tipoProveedor.setBounds(375, 430, 220, 30);
+        informacionProveedor.add(tipoProveedor);
+
+        int tipo;
+        String rolSeleccionado = (String) tipoProveedor.getSelectedItem();
+        switch (rolSeleccionado) {
+            case "Mayorista":
+                tipo = 1;
+                break;
+            case "Minorista":
+                tipo = 2;
+                break;
+            default:
+                tipo = 0; // Manejar un valor por defecto si no coincide ninguna opción
+        }
 
 
 
@@ -181,7 +201,7 @@ public class VentanaAggProveedores extends JFrame{
                 String telefono = cajaTelefono.getText();
                 String nombreEmpresa = cajaTelefonoEmpresa.getText();
                 int nitEmpresa = Integer.parseInt(cajaDireccion.getText()); // Asumiendo que nitEmpresa es un número
-                int tipo = Integer.parseInt(cajaTipo.getText()); // Asumiendo que tipo es un número
+                 // Asumiendo que tipo es un número
                 String email = cajaCliente.getText();
 
                 controllerProveedor.crearProveedor(nombre,nombreEmpresa,nitEmpresa,telefono,email,tipo);
@@ -192,7 +212,6 @@ public class VentanaAggProveedores extends JFrame{
                 cajaTelefono.setText("");
                 cajaTelefonoEmpresa.setText("");
                 cajaDireccion.setText("");
-                cajaTipo.setText("");
                 cajaCliente.setText("");
             }
         });

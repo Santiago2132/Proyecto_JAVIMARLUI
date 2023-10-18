@@ -1,12 +1,14 @@
 package UI;
 
+import Controller.ControllerAdministrador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaAggEmpleado extends JFrame {
-
+    ControllerAdministrador admin = new ControllerAdministrador();
 
     public static void main(String[] args){
         VentanaAggEmpleado ventanaAggEmp = new VentanaAggEmpleado();
@@ -147,6 +149,24 @@ public class VentanaAggEmpleado extends JFrame {
         botonAgregar.setBounds(1015,520,150,50);
         botonAgregar.setBackground(Color.white);
         informacionEmpleado.add(botonAgregar);
+        // Agrega un ActionListener al botónAgregar
+        botonAgregar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String nombre = cajaNombre.getText();
+                String id = cajaId.getText();
+                String telefono = cajaTelefono.getText();
+                String direccion = cajaDireccion.getText();
+                String rolString = cajaEmpleado.getText();
+                int rol = Integer.parseInt(rolString);
+                admin.crearUsuario(nombre,id,telefono,direccion,rol);
+                cajaNombre.setText("");
+                cajaId.setText("");
+                cajaTelefono.setText("");
+                cajaDireccion.setText("");
+                cajaEmpleado.setText("");
+            }
+        });
+
     }
 
     public void panelContenedor(){

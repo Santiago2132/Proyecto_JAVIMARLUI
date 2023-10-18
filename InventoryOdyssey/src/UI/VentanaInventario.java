@@ -103,8 +103,8 @@ public class VentanaInventario extends JFrame {
         botonReportes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaProveedores ventanaProv =  new VentanaProveedores();
-                ventanaProv.setVisible(true);
+                VentanaReportes ventanaReportes = new VentanaReportes();
+                ventanaReportes.setVisible(true);
                 dispose();
             }
         });

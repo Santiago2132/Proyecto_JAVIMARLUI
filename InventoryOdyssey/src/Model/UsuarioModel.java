@@ -43,6 +43,32 @@ public class UsuarioModel {
         }
         return resultado;
     }
+    public boolean agregarUsuarioT(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) {
+        boolean exito = false;
+        Connection conexion = null;
+        String query = "INSERT INTO USUARIO (NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?)";
+        try {
+            conexion = BaseDatos.getConnection();
+            pstmt = conexion.prepareStatement(query);
+            pstmt.setString(1, nombreCompleto);
+            pstmt.setString(2, nombreUsuario);
+            pstmt.setString(3, contrasena);
+            pstmt.setString(4, email);
+            pstmt.setInt(5, rol);
+            int resultado = pstmt.executeUpdate();
+            if(resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Usuario agregado correctamente.");
+                exito = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo agregar el usuario.");
+            }
+            pstmt.close();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return exito;
+    }
+
 
     public int eliminarUsuarioPorNombreCompleto(String nombreCompleto) {
         int resultado = 0;

@@ -140,10 +140,33 @@ public class VentanaAggEmpleado extends JFrame {
         correoEmpleado.setBounds(120,450,150,20);
         correoEmpleado.setForeground(Color.BLACK);
         informacionEmpleado.add(correoEmpleado);
-
+        /*
         JTextField cajaEmpleado = new JTextField();
         cajaEmpleado.setBounds(350,450,220,30);
         informacionEmpleado.add(cajaEmpleado);
+
+         */
+        String[] opciones = {"Administrador", "Vendedor", "Bodeguero"};
+        JComboBox<String> comboRoles = new JComboBox<>(opciones);
+        comboRoles.setBounds(350, 450, 220, 30);
+        informacionEmpleado.add(comboRoles);
+
+        int rol;
+        String rolSeleccionado = (String) comboRoles.getSelectedItem();
+        switch (rolSeleccionado) {
+            case "Administrador":
+                rol = 1;
+                break;
+            case "Vendedor":
+                rol = 2;
+                break;
+            case "Bodeguero":
+                rol = 3;
+                break;
+            default:
+                rol = 0; // Manejar un valor por defecto si no coincide ninguna opción
+        }
+
 
         JButton botonAgregar =  new JButton("Agregar Empleado");
         botonAgregar.setBounds(1015,520,150,50);
@@ -156,14 +179,11 @@ public class VentanaAggEmpleado extends JFrame {
                 String id = cajaId.getText();
                 String telefono = cajaTelefono.getText();
                 String direccion = cajaDireccion.getText();
-                String rolString = cajaEmpleado.getText();
-                int rol = Integer.parseInt(rolString);
                 admin.crearUsuario(nombre,id,telefono,direccion,rol);
                 cajaNombre.setText("");
                 cajaId.setText("");
                 cajaTelefono.setText("");
                 cajaDireccion.setText("");
-                cajaEmpleado.setText("");
             }
         });
     }

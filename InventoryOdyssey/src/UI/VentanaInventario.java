@@ -112,7 +112,7 @@ public class VentanaInventario extends JFrame {
         botonProveedores.setBorderPainted(false);
         panelInvisble.add(botonProveedores);
 
-        JButton botonEmpleadoMes = new JButton("EMPLEADO DEL MES");
+        JButton botonEmpleadoMes = new JButton("AGREGAR PRODUCTO");
         botonEmpleadoMes.setBounds(350,24,170,40);
         botonEmpleadoMes.setBackground(Color.WHITE);
         botonEmpleadoMes.setBorderPainted(false);

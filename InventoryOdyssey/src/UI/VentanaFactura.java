@@ -125,7 +125,7 @@ public class VentanaFactura extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Factura factura = new Factura();
                 factura.setVisible(true);
-                dispose();
+                //dispose();
             }
         });
 

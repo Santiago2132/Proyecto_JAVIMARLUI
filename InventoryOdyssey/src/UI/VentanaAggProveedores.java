@@ -122,34 +122,44 @@ public class VentanaAggProveedores extends JFrame{
         cajaTelefono.setBounds(375,250,220,30);
         informacionProveedor.add(cajaTelefono);
 
-        JLabel telefonoEmpresa = new JLabel("Teléfono Empresarial:");
-        telefonoEmpresa.setFont(new Font("Rockwell",Font.BOLD,20));
-        telefonoEmpresa.setBounds(120,310,240,20);
-        telefonoEmpresa.setForeground(Color.BLACK);
-        informacionProveedor.add(telefonoEmpresa);
+        JLabel nombreEmpresa = new JLabel("Nombre dela Empresa:");
+        nombreEmpresa.setFont(new Font("Rockwell",Font.BOLD,20));
+        nombreEmpresa.setBounds(120,310,240,20);
+        nombreEmpresa.setForeground(Color.BLACK);
+        informacionProveedor.add(nombreEmpresa);
 
         JTextField cajaTelefonoEmpresa = new JTextField();
         cajaTelefonoEmpresa.setBounds(375,310,220,30);
         informacionProveedor.add(cajaTelefonoEmpresa);
 
-        JLabel direccionCliente = new JLabel("Dirección:");
-        direccionCliente.setFont(new Font("Rockwell",Font.BOLD,20));
-        direccionCliente.setBounds(120,370,150,20);
-        direccionCliente.setForeground(Color.BLACK);
-        informacionProveedor.add(direccionCliente);
+        JLabel nitEmpresa = new JLabel("NIT de la empresa:");
+        nitEmpresa.setFont(new Font("Rockwell",Font.BOLD,20));
+        nitEmpresa.setBounds(120,370,180,20);
+        nitEmpresa.setForeground(Color.BLACK);
+        informacionProveedor.add(nitEmpresa);
 
         JTextField cajaDireccion = new JTextField();
         cajaDireccion.setBounds(375,370,220,30);
         informacionProveedor.add(cajaDireccion);
 
+        JLabel tipoProv = new JLabel("Tipo:");
+        tipoProv.setFont(new Font("Rockwell",Font.BOLD,20));
+        tipoProv.setBounds(120,430,150,20);
+        tipoProv.setForeground(Color.BLACK);
+        informacionProveedor.add(tipoProv);
+
+        JTextField cajaTipo = new JTextField();
+        cajaTipo.setBounds(375,430,220,30);
+        informacionProveedor.add(cajaTipo);
+
         JLabel correoCliente = new JLabel("Correo:");
         correoCliente.setFont(new Font("Rockwell",Font.BOLD,20));
-        correoCliente.setBounds(120,430,150,20);
+        correoCliente.setBounds(120,490,150,20);
         correoCliente.setForeground(Color.BLACK);
         informacionProveedor.add(correoCliente);
 
         JTextField cajaCliente = new JTextField();
-        cajaCliente.setBounds(375,430,220,30);
+        cajaCliente.setBounds(375,490,220,30);
         informacionProveedor.add(cajaCliente);
 
         JButton botonAgregar =  new JButton("Agregar Proveedor");

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Persona {
     String nombre = null;
-    int indetificacion = 0;
+    int identificacion = 0;
     int telefono = 0;
     Date edad = null;
     String correo = null;
@@ -19,9 +19,9 @@ public class Persona {
         this.correo = correo;
         this.direccion = direccion;
     }
-    public Persona(String nombre, int indetificacion, int telefono, Date edad, String correo, String direccion) {
+    public Persona(String nombre, int identificacion, int telefono, Date edad, String correo, String direccion) {
         this.nombre = nombre;
-        this.indetificacion = indetificacion;
+        this.identificacion = identificacion;
         this.telefono = telefono;
         this.edad = edad;
         this.correo = correo;
@@ -36,12 +36,12 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public int getIndetificacion() {
-        return indetificacion;
+    public int getIdentificacion() {
+        return identificacion;
     }
 
     public void setIndetificacion(int indetificacion) {
-        this.indetificacion = indetificacion;
+        this.identificacion = indetificacion;
     }
 
     public int getTelefono() {

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class ControllerProductos {
     ProductoModel productoModel = new ProductoModel();
-    /*
+
     public boolean crearProductoBasico(double precio, double iva) throws SQLException, IOException {
-        return productoModel.agregarProductoB2(precio,iva);
+        return productoModel.agregarProducto(precio,iva);
     }
 
-     */
+
 
     public boolean eliminarProducto(int idProducto) {
 
@@ -27,6 +27,6 @@ public class ControllerProductos {
     }
     public static void main(String[] args) throws SQLException, IOException {
         ControllerProductos controllerProductos = new ControllerProductos();
-        //controllerProductos.crearProductoBasico(1231231.21,12);
+        controllerProductos.crearProductoBasico(1231231.21,12);
     }
 }

@@ -104,12 +104,21 @@ public class VentanaAggEmpleado extends JFrame {
         JTextField cajaNombre = new JTextField();
         cajaNombre.setBounds(350,130,220,30);
         informacionEmpleado.add(cajaNombre);
-
+        /*
         JLabel idEmpleado = new JLabel("Nombre usuario:");
         idEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
         idEmpleado.setBounds(120,210,150,20);
         idEmpleado.setForeground(Color.BLACK);
         informacionEmpleado.add(idEmpleado);
+
+         */
+        JLabel idEmpleado = new JLabel("User:");
+        idEmpleado.setFont(new Font("Rockwell", Font.BOLD, 20));
+        Dimension preferredSize = idEmpleado.getPreferredSize();
+        idEmpleado.setBounds(120, 210, preferredSize.width, preferredSize.height);
+        idEmpleado.setForeground(Color.BLACK);
+        informacionEmpleado.add(idEmpleado);
+
 
         JTextField cajaId = new JTextField();
         cajaId.setBounds(350,210,220,30);

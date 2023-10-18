@@ -56,6 +56,32 @@ public class ProductoModel {
         }
         return resultado;
     }
+    public boolean agregarProducto(double precio, double iva) {
+        boolean resultado = false;
+        Connection conexion = null;
+        String query = "INSERT INTO PRODUCTO (PRECIO, IMAGEN, IVA) VALUES (?, ?, ?)";
+        try {
+            conexion = BaseDatos.getConnection();
+            pstmt = conexion.prepareStatement(query);
+            pstmt.setDouble(1, precio);
+
+            // Obtener la imagen desde una ruta predeterminada en caso de que no esté disponible
+            String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
+            Blob imagen = obtenerImagen(rutaImagen);
+            pstmt.setBlob(2, imagen);
+
+            pstmt.setDouble(3, iva);
+            int filasAfectadas = pstmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
+                resultado = true;
+            }
+            pstmt.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return resultado;
+    }
 
     public int eliminarProducto(int idProducto) {
         int resultado = 0;

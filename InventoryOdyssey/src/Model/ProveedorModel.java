@@ -1,8 +1,7 @@
 package Model;
 import java.sql.*;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-public class Proveedor {
+public class ProveedorModel {
     public static BaseDatos conexion = new BaseDatos();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
@@ -83,7 +82,7 @@ public class Proveedor {
     }
 
     public static void main(String[] args) {
-        Proveedor proveedor = new Proveedor();
+        ProveedorModel proveedor = new ProveedorModel();
         int resultadoAgregar = proveedor.agregarProveedor("Santiago Pico", "Natura", 123456789, "123-456-7890", "santiago@gmail.com", 1);
         //int resultadoEliminar = proveedor.eliminarProveedor(2);
         //int resultadoMofificar = proveedor.modificarProveedor(1, "Santiago Pico", "123-456-7890", "santiagoPico@gmail.com", 2);

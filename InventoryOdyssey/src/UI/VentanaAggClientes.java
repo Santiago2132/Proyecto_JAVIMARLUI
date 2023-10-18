@@ -1,5 +1,7 @@
 package UI;
 
+import Controller.ControllerCliente;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaAggClientes extends JFrame {
-
+    ControllerCliente controllerCliente = new ControllerCliente();
     public static void main(String[] args){
         VentanaAggClientes ventanaAggClientes = new VentanaAggClientes();
         ventanaAggClientes.setVisible(true);
@@ -147,7 +149,21 @@ public class VentanaAggClientes extends JFrame {
         botonAgregar.setBounds(1015,520,150,50);
         botonAgregar.setBackground(Color.white);
         informacionCliente.add(botonAgregar);
-
+        botonAgregar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String nombre = cajaNombre.getText();
+                String id = cajaId.getText();
+                String telefono = cajaTelefono.getText();
+                String correo =cajaCliente.getText();
+                String direccion = cajaDireccion.getText();
+                controllerCliente.crearCliente(nombre,id,telefono,direccion,correo);
+                cajaNombre.setText("");
+                cajaId.setText("");
+                cajaTelefono.setText("");
+                cajaDireccion.setText("");
+                cajaCliente.setText("");
+            }
+        });
 
     }
 

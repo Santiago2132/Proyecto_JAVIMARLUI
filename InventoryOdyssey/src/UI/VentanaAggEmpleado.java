@@ -166,7 +166,6 @@ public class VentanaAggEmpleado extends JFrame {
                 cajaEmpleado.setText("");
             }
         });
-
     }
 
     public void panelContenedor(){

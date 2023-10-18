@@ -11,8 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VentanaLogin extends JFrame {
-
     ControlDeAcceso controlDeAcceso = new ControlDeAcceso();
+    public static void main(String[] args) {
+        VentanaLogin ventanaLogin=new VentanaLogin();
+        ventanaLogin.setVisible(true);
+    }
+
     JLayeredPane contenedor = new JLayeredPane();
     JPanel panelLogin = new JPanel();
     JPanel panelTitulos = new JPanel();
@@ -72,7 +76,6 @@ public class VentanaLogin extends JFrame {
         password.setBounds(115, 250, 250, 30);
         password.setForeground(Color.white);
         panelFondoInfo.add(password);
-
 
         //CAJAS DE TEXTO
         JTextField cajaUsuario = new JTextField();
@@ -174,6 +177,7 @@ public class VentanaLogin extends JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         Font fontSubrayado = new Font(attributes);
         titulo.setFont(fontSubrayado);
+
     }
 
     public void panelContenedor(){

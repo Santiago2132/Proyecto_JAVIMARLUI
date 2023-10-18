@@ -124,10 +124,10 @@ public class VentanaReportes extends JFrame{
         vendedorDelMes.add(tEmpleado);
 
         JLabel imagen = new JLabel();
-        /*ImageIcon image = new ImageIcon(getClass().getResource("/Imagenes/empleado-del-mes.png"));
+        ImageIcon image = new ImageIcon(getClass().getResource("/Imagenes/empleado-del-mes.png"));
         Image icono = image.getImage().getScaledInstance(350, 350, Image.SCALE_SMOOTH);
         imagen.setIcon(new ImageIcon(icono));
-        imagen.setBounds(140,260,350,350);*/
+        imagen.setBounds(140,260,350,350);
         vendedorDelMes.add(imagen);
     }
 

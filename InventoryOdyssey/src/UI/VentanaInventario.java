@@ -158,6 +158,7 @@ public class VentanaInventario extends JFrame {
         model.addColumn("<html><div style='text-align: center;'>PRECIO<br>UNIDAD</div></html>\"");
         model.addColumn("<html><div style='text-align: center;'>CANTIDAD</div></html>\"");
         model.addColumn("<html><div style='text-align: center;'>PROVEEDOR</div></html>\"");
+        model.addColumn("<html><div style='text-align: center;'>FECH. REGISTRO</div></html>\"");
         // Configurar filas de diferentes alturas
         table = new JTable(model);
 
@@ -209,12 +210,6 @@ public class VentanaInventario extends JFrame {
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelInventario.add(panelConScroll, BorderLayout.CENTER);
     }
-    public void agregarProducto(String id, String referencia, String producto, String descripcion, String precio, String cantidad, String proveedor) {
-        // Añadir una nueva fila a la tabla
-        Object[] fila = {id, referencia, producto, descripcion, precio, cantidad, proveedor};
-        model.addRow(fila);
-    }
-
 
 
 

@@ -8,6 +8,7 @@ public class Factura extends JFrame {
         Factura factura = new Factura();
         factura.setVisible(true);
     }
+
     public Factura(){
         this.setTitle("INVENTORY ODYSSEY - FACTURA");
         this.setSize(400,400);

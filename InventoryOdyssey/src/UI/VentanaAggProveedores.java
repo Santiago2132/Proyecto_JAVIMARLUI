@@ -1,9 +1,5 @@
 package UI;
 
-<<<<<<< HEAD
-=======
-import Controller.ControllerCliente;
->>>>>>> c7ac3e004a71ac9b270780fb95dff2c063f3fbc5
 import Controller.ControllerProveedor;
 
 import javax.swing.*;
@@ -187,11 +183,9 @@ public class VentanaAggProveedores extends JFrame{
                 int nitEmpresa = Integer.parseInt(cajaDireccion.getText()); // Asumiendo que nitEmpresa es un número
                 int tipo = Integer.parseInt(cajaTipo.getText()); // Asumiendo que tipo es un número
                 String email = cajaCliente.getText();
-<<<<<<< HEAD
+
                 controllerProveedor.crearProveedor(nombre,nombreEmpresa,nitEmpresa,telefono,email,tipo);
-=======
-                
->>>>>>> c7ac3e004a71ac9b270780fb95dff2c063f3fbc5
+
                 // Limpiar los campos de entrada
                 cajaNombre.setText("");
                 cajaId.setText("");

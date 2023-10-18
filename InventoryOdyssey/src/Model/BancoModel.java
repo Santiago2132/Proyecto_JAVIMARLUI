@@ -4,12 +4,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.JOptionPane;
 
-public class Banco {
+public class BancoModel {
     public static BaseDatos conexion = new BaseDatos();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
@@ -123,7 +122,7 @@ public class Banco {
     public static void main (String[] args) throws SQLException, IOException {
         String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
         Blob imagen = obtenerImagen(rutaImagen);
-        Banco banco = new Banco();
+        BancoModel banco = new BancoModel();
         //int resultadoAgregar = banco.agregarBanco("Bancolombia", imagen);
         //int resultadoEliminar = banco.eliminarBanco(1);
         //int resultadoModificar = banco.modificarBanco(1, "Banco de Colombia", imagen);

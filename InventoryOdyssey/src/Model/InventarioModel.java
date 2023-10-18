@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inventario {
+public class InventarioModel {
     public static BaseDatos conexion = new BaseDatos();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
@@ -163,7 +163,7 @@ public class Inventario {
     }
 
     public static void main (String[] args){
-        Inventario inventario = new Inventario();
+        InventarioModel inventario = new InventarioModel();
         //int resultadoAgregar = inventario.agregarEnInventario(1, 1, "Puntilla", "Tornillos y adhesivos", 10, 15.00, "Puntilla Con Cabeza 3pg 500g" );
         //int resultadoEliminar = inventario.eliminarDeInventario(1);
         //int resultadoModificar = inventario.modificarEnInventario(1, 9, 75.00);

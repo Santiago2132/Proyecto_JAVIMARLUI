@@ -2,7 +2,7 @@ package Model;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-public class Cliente {
+public class ClienteModel {
     public static BaseDatos conexion = new BaseDatos();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
@@ -107,7 +107,7 @@ public class Cliente {
     }
 
     public static void main (String[] args){
-        Cliente cliente = new Cliente();
+        ClienteModel cliente = new ClienteModel();
         //int resultadoAgregar = cliente.agregarCliente("Santiago", "109861459", "Callejuelas", "3152467894", "santiago@gmail.com");
         //int resultadoEliminar = cliente.eliminarCliente(1);
         //int resultadoModificar = cliente.modificarCliente(1, "Santiago Maldonado","109861449", "Callejuelas Apto", "3152567894", "santiagoM@gmail.com" );

@@ -120,7 +120,7 @@ public class VentanaLogin extends JFrame {
         Icon iconAdmin = new ImageIcon(imgadmin.getImage().getScaledInstance(botonLogin.getWidth(), botonLogin.getHeight(), Image.SCALE_SMOOTH));
         botonLogin.setRolloverIcon(iconAdmin);
         panelFondoInfo.add(botonLogin);
-        
+
         botonLogin.addActionListener(new ActionListener() {
 
             @Override

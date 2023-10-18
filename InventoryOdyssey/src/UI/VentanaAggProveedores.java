@@ -1,5 +1,8 @@
 package UI;
 
+import Controller.ControllerCliente;
+import Controller.ControllerProveedor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -78,6 +81,8 @@ public class VentanaAggProveedores extends JFrame{
 
     public void panelInformacionProveedor(){
 
+        ControllerProveedor controllerProveedor = new ControllerProveedor();
+
 
         JLabel imagen = new JLabel();
         ImageIcon image = new ImageIcon(getClass().getResource("/Imagenes/mujer.png"));
@@ -152,6 +157,8 @@ public class VentanaAggProveedores extends JFrame{
         cajaTipo.setBounds(375,430,220,30);
         informacionProveedor.add(cajaTipo);
 
+
+
         JLabel correoCliente = new JLabel("Correo:");
         correoCliente.setFont(new Font("Rockwell",Font.BOLD,20));
         correoCliente.setBounds(120,490,150,20);
@@ -162,10 +169,32 @@ public class VentanaAggProveedores extends JFrame{
         cajaCliente.setBounds(375,490,220,30);
         informacionProveedor.add(cajaCliente);
 
-        JButton botonAgregar =  new JButton("Agregar Proveedor");
-        botonAgregar.setBounds(995,525,180,50);
+        JButton botonAgregar = new JButton("Agregar Proveedor");
+        botonAgregar.setBounds(995, 525, 180, 50);
         botonAgregar.setBackground(Color.white);
         informacionProveedor.add(botonAgregar);
+
+        botonAgregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = cajaNombre.getText();
+                String id = cajaId.getText();
+                String telefono = cajaTelefono.getText();
+                String nombreEmpresa = cajaTelefonoEmpresa.getText();
+                int nitEmpresa = Integer.parseInt(cajaDireccion.getText()); // Asumiendo que nitEmpresa es un número
+                int tipo = Integer.parseInt(cajaTipo.getText()); // Asumiendo que tipo es un número
+                String email = cajaCliente.getText();
+                
+                // Limpiar los campos de entrada
+                cajaNombre.setText("");
+                cajaId.setText("");
+                cajaTelefono.setText("");
+                cajaTelefonoEmpresa.setText("");
+                cajaDireccion.setText("");
+                cajaTipo.setText("");
+                cajaCliente.setText("");
+            }
+        });
     }
 
 

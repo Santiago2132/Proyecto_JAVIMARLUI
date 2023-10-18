@@ -1,8 +1,10 @@
 package Controller;
 
 import Classes.Usuario;
+import Model.UsuarioModel;
 
 public class ControlDeAcceso {
+    public UsuarioModel usuariomodelo = new UsuarioModel();
 
     public ControlDeAcceso() {
     }
@@ -10,16 +12,14 @@ public class ControlDeAcceso {
     //Methods
     public boolean login(String name, String password){
         Usuario usuario = new Usuario(name, password);
-        Usuario usuarioPrueba = new Usuario("Santiago","Karen");
-        if((usuario.getNombre_usuario().equals(usuarioPrueba.getNombre_usuario())) && (usuario.getPassword().equals(usuarioPrueba.getPassword()))) {
+        if(usuariomodelo.validarUsuario(name, password)) {
             return true;
         }else {
             return false;
         }
     }
-    public int rol(){
-        Usuario usuarioPrueba = new Usuario("Santiago","Karen",1);//prueba sin modelo
-        return usuarioPrueba.getTipoUsuario();
+    public int rol(String name){
+        return usuariomodelo.obtenerRolPorNombreUsuario(name);
     }
     public boolean logout(){
         return true;

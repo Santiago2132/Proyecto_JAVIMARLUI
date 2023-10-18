@@ -46,7 +46,7 @@ public class UIlogin extends JFrame implements ActionListener {
             String nombre = txtNombre.getText();
             String contraseña = new String(txtContraseña.getPassword());
             if(controlDeAcceso.login(nombre,contraseña)==true){
-                int rol = controlDeAcceso.rol();
+                int rol = controlDeAcceso.rol(nombre);
                 if(rol ==  1){
                     this.setVisible(false);
                     this.dispose();

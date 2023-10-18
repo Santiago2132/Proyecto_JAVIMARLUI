@@ -1,12 +1,14 @@
 package UI;
 
+import Controller.ControllerProveedor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaAggProveedores extends JFrame{
-
+    ControllerProveedor controllerProveedor = new ControllerProveedor();
     public static void main(String[]args){
         VentanaAggProveedores ventanaAggProveedores = new VentanaAggProveedores();
         ventanaAggProveedores.setVisible(true);
@@ -166,6 +168,28 @@ public class VentanaAggProveedores extends JFrame{
         botonAgregar.setBounds(995,525,180,50);
         botonAgregar.setBackground(Color.white);
         informacionProveedor.add(botonAgregar);
+
+        botonAgregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = cajaNombre.getText();
+                String id = cajaId.getText();
+                String telefono = cajaTelefono.getText();
+                String nombreEmpresa = cajaTelefonoEmpresa.getText();
+                int nitEmpresa = Integer.parseInt(cajaDireccion.getText()); // Asumiendo que nitEmpresa es un número
+                int tipo = Integer.parseInt(cajaTipo.getText()); // Asumiendo que tipo es un número
+                String email = cajaCliente.getText();
+                controllerProveedor.crearProveedor(nombre,nombreEmpresa,nitEmpresa,telefono,email,tipo);
+                // Limpiar los campos de entrada
+                cajaNombre.setText("");
+                cajaId.setText("");
+                cajaTelefono.setText("");
+                cajaTelefonoEmpresa.setText("");
+                cajaDireccion.setText("");
+                cajaTipo.setText("");
+                cajaCliente.setText("");
+            }
+        });
     }
 
 

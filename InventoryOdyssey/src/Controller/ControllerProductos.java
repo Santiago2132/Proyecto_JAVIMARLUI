@@ -1,23 +1,32 @@
 package Controller;
 
 import Classes.Producto;
+import Model.ProductoModel;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ControllerProductos {
-
-    public boolean modificarProducto(int idProducto, Producto nuevoProducto) {
-
-        return false; // No se encontró el producto con el ID dado
+    ProductoModel productoModel = new ProductoModel();
+    /*
+    public boolean crearProductoBasico(double precio, double iva) throws SQLException, IOException {
+        return productoModel.agregarProductoB2(precio,iva);
     }
+
+     */
 
     public boolean eliminarProducto(int idProducto) {
 
-        return false; // No se encontró el producto con el ID dado
+        return false;
     }
 
     public Producto consultarProducto(int idProducto) {
 
-        return null; // No se encontró el producto con el ID dado
+        return null;
+    }
+    public static void main(String[] args) throws SQLException, IOException {
+        ControllerProductos controllerProductos = new ControllerProductos();
+        //controllerProductos.crearProductoBasico(1231231.21,12);
     }
 }

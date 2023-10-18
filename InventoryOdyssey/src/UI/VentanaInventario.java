@@ -1,5 +1,7 @@
 package UI;
 
+import Model.InventarioModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VentanaInventario extends JFrame {
+    InventarioModel inventarioModel = new InventarioModel();
 
    public static void main (String []args){
         VentanaInventario ventanaInventario = new VentanaInventario();
@@ -209,6 +212,11 @@ public class VentanaInventario extends JFrame {
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelInventario.add(panelConScroll, BorderLayout.CENTER);
+    }
+    public void agregarProducto(String id, String referencia, String producto, String descripcion, String precio, String cantidad, String proveedor) {
+        // Añadir una nueva fila a la tabla
+        Object[] fila = {id, referencia, producto, descripcion, precio, cantidad, proveedor};
+        model.addRow(fila);
     }
 
 

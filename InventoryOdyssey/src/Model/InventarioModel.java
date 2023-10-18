@@ -126,7 +126,7 @@ public class InventarioModel {
     }
 
     //MÉTODO PARA RECORRER LA INFORMACIÓN DEL INVENTARIO
-    public static List<InformacionInventario> obtenerInformacionInventario() {
+    public List<InformacionInventario> obtenerInformacionInventario() {
         List<InformacionInventario> informacionInventario = new ArrayList<>();
         Connection conexion = null;
         PreparedStatement pstmt = null;
@@ -163,21 +163,6 @@ public class InventarioModel {
     }
 
     public static void main (String[] args){
-        InventarioModel inventario = new InventarioModel();
-        //int resultadoAgregar = inventario.agregarEnInventario(1, 1, "Puntilla", "Tornillos y adhesivos", 10, 15.00, "Puntilla Con Cabeza 3pg 500g" );
-        //int resultadoEliminar = inventario.eliminarDeInventario(1);
-        //int resultadoModificar = inventario.modificarEnInventario(1, 9, 75.00);
 
-        // Llama al método para obtener la información del inventario
-        List<InformacionInventario> informacion = inventario.obtenerInformacionInventario();
-        // Itera a través de la lista de InformacionInventario y muestra la información
-        for (InformacionInventario info : informacion) {
-            System.out.println("ID Inventario: " + info.getIdInventario());
-            System.out.println("ID Proveedor: " + info.getIdProveedor());
-            System.out.println("Nombre: " + info.getNombre());
-            System.out.println("Precio de Compra: " + info.getPrecioCompra());
-            System.out.println("Cantidad en Stock: " + info.getCantidadStock());
-            System.out.println();
-        }
     }
 }

@@ -120,6 +120,14 @@ public class VentanaInventario extends JFrame {
         botonEmpleadoMes.setBackground(Color.WHITE);
         botonEmpleadoMes.setBorderPainted(false);
         panelInvisble.add(botonEmpleadoMes);
+        botonEmpleadoMes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaAggProducto ventanaAggProducto = new VentanaAggProducto();
+                ventanaAggProducto.setVisible(true);
+                dispose();
+            }
+        });
 
         JButton botonAggProv = new JButton("AGREGAR PROVEEDORES");
         botonAggProv.setBounds(540,24,190,40);

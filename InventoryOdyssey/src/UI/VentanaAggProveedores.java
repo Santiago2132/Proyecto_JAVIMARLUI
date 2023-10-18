@@ -74,6 +74,7 @@ public class VentanaAggProveedores extends JFrame{
                 dispose();
             }
         });
+
     }
 
     public void panelInformacionProveedor(){
@@ -128,9 +129,9 @@ public class VentanaAggProveedores extends JFrame{
         nombreEmpresa.setForeground(Color.BLACK);
         informacionProveedor.add(nombreEmpresa);
 
-        JTextField cajaTelefonoEmpresa = new JTextField();
-        cajaTelefonoEmpresa.setBounds(375,310,220,30);
-        informacionProveedor.add(cajaTelefonoEmpresa);
+        JTextField cajaNombreEmpresa = new JTextField();
+        cajaNombreEmpresa.setBounds(375,310,220,30);
+        informacionProveedor.add(cajaNombreEmpresa);
 
         JLabel nitEmpresa = new JLabel("NIT de la empresa:");
         nitEmpresa.setFont(new Font("Rockwell",Font.BOLD,20));
@@ -138,9 +139,9 @@ public class VentanaAggProveedores extends JFrame{
         nitEmpresa.setForeground(Color.BLACK);
         informacionProveedor.add(nitEmpresa);
 
-        JTextField cajaDireccion = new JTextField();
-        cajaDireccion.setBounds(375,370,220,30);
-        informacionProveedor.add(cajaDireccion);
+        JTextField cajaNit = new JTextField();
+        cajaNit.setBounds(375,370,220,30);
+        informacionProveedor.add(cajaNit);
 
         JLabel tipoProv = new JLabel("Tipo:");
         tipoProv.setFont(new Font("Rockwell",Font.BOLD,20));
@@ -152,20 +153,38 @@ public class VentanaAggProveedores extends JFrame{
         cajaTipo.setBounds(375,430,220,30);
         informacionProveedor.add(cajaTipo);
 
-        JLabel correoCliente = new JLabel("Correo:");
-        correoCliente.setFont(new Font("Rockwell",Font.BOLD,20));
-        correoCliente.setBounds(120,490,150,20);
-        correoCliente.setForeground(Color.BLACK);
-        informacionProveedor.add(correoCliente);
+        JLabel correoProveedor = new JLabel("Correo:");
+        correoProveedor.setFont(new Font("Rockwell",Font.BOLD,20));
+        correoProveedor.setBounds(120,490,150,20);
+        correoProveedor.setForeground(Color.BLACK);
+        informacionProveedor.add(correoProveedor);
 
-        JTextField cajaCliente = new JTextField();
-        cajaCliente.setBounds(375,490,220,30);
-        informacionProveedor.add(cajaCliente);
+        JTextField cajaCorreoProv = new JTextField();
+        cajaCorreoProv.setBounds(375,490,220,30);
+        informacionProveedor.add(cajaCorreoProv);
 
         JButton botonAgregar =  new JButton("Agregar Proveedor");
         botonAgregar.setBounds(995,525,180,50);
         botonAgregar.setBackground(Color.white);
         informacionProveedor.add(botonAgregar);
+
+        JButton botonBorrar =  new JButton("BORRAR");
+        botonBorrar.setBounds(820,525,160,50);
+        botonBorrar.setBackground(Color.white);
+        informacionProveedor.add(botonBorrar);
+
+        botonBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cajaNombre.setText("");
+                cajaId.setText("");
+                cajaTelefono.setText("");
+                cajaNombreEmpresa.setText("");
+                cajaNit.setText("");
+                cajaNit.setText("");
+                cajaCorreoProv.setText("");
+            }
+        });
     }
 
 

@@ -2,6 +2,8 @@ package UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class VentanaReportes extends JFrame{
 
@@ -143,6 +145,27 @@ public class VentanaReportes extends JFrame{
         anio.setBounds(223,20,250,40);
         anio.setForeground(Color.BLACK);
         panelFondo1.add(anio);
+
+        JButton botonVolver =  new JButton("<-");
+        botonVolver.setBounds(430,20,60,60);
+        botonVolver.setBackground(Color.white);
+        ImageIcon icono = new ImageIcon("Imagenes/volver.png");
+        int wboton = botonVolver.getWidth();
+        int hboton = botonVolver.getHeight();
+        Image imagen = icono.getImage();
+        Image imagenEscalada = imagen.getScaledInstance(wboton,hboton,Image.SCALE_SMOOTH);
+        botonVolver.setIcon(new ImageIcon(imagenEscalada));
+        panelFondo1.add(botonVolver);
+
+        botonVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaInventario ventanaInventario = new VentanaInventario();
+                ventanaInventario.setVisible(true);
+                dispose();
+            }
+        });
+
     }
 
     public void calEnero(){
@@ -297,6 +320,7 @@ public class VentanaReportes extends JFrame{
         nov.setForeground(Color.WHITE);
         calNov.add(nov);
     }
+
 
     public void calDecem(){
         calDecem.setLayout(null);

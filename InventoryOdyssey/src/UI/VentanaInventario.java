@@ -112,11 +112,20 @@ public class VentanaInventario extends JFrame {
         botonProveedores.setBorderPainted(false);
         panelInvisble.add(botonProveedores);
 
-        JButton botonEmpleadoMes = new JButton("AGREGAR PRODUCTO");
-        botonEmpleadoMes.setBounds(350,24,170,40);
-        botonEmpleadoMes.setBackground(Color.WHITE);
-        botonEmpleadoMes.setBorderPainted(false);
-        panelInvisble.add(botonEmpleadoMes);
+        JButton botonAggPro = new JButton("AGREGAR PRODUCTO");
+        botonAggPro.setBounds(350,24,170,40);
+        botonAggPro.setBackground(Color.WHITE);
+        botonAggPro.setBorderPainted(false);
+        panelInvisble.add(botonAggPro);
+
+        botonAggPro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaAggProducto ventanaAggProducto = new VentanaAggProducto();
+                ventanaAggProducto.setVisible(true);
+                dispose();
+            }
+        });
 
         JButton botonAggProv = new JButton("AGREGAR PROVEEDORES");
         botonAggProv.setBounds(540,24,190,40);
@@ -147,7 +156,25 @@ public class VentanaInventario extends JFrame {
                 dispose();
             }
         });
+
+        JButton botonDelEmpleado = new JButton("ELIMINAR EMPLEADO");
+        botonDelEmpleado.setBounds(950,24,180,40);
+        botonDelEmpleado.setBackground(Color.WHITE);
+        botonDelEmpleado.setBorderPainted(false);
+        panelInvisble.add(botonDelEmpleado);
+
+        botonDelEmpleado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaDelEmpleado ventanaDelEmpleado = new VentanaDelEmpleado();
+                ventanaDelEmpleado.setVisible(true);
+                dispose();
+            }
+        });
     }
+
+
+
 
     public static void tablaProductos() {
         // Crear un modelo de tabla

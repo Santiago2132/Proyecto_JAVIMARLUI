@@ -4,13 +4,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.JOptionPane;
 
-public class Producto {
+public class ProductoModel {
     public static BaseDatos conexion = new BaseDatos();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
@@ -118,7 +116,7 @@ public class Producto {
     public static void main (String[] args) throws IOException, SQLException {
         String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
         Blob imagen = obtenerImagen(rutaImagen);
-        Producto producto = new Producto();
+        ProductoModel producto = new ProductoModel();
         int resultadoAgregar = producto.agregarProducto(19.99, imagen, 0.19);
         //int resultadoEliminar = producto.eliminarProducto(1);
        // int resultadoModificar = producto.modificarProducto(1, 20.00, 0.19);

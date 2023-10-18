@@ -12,12 +12,12 @@ public class MovimientosDiarios {
         registroVentas = new ArrayList<>();
     }
 
-    public void registrarCompra(Compras compra) {
-        registroCompras.add(compra);
+    public boolean registrarCompra(Compras compra) {
+        return registroCompras.add(compra);
     }
 
-    public void registrarVenta(Factura factura) {
-        registroVentas.add(factura);
+    public boolean registrarVenta(Factura factura) {
+        return registroVentas.add(factura);
     }
 
     public ArrayList<Compras> getRegistroCompras() {
@@ -31,13 +31,11 @@ public class MovimientosDiarios {
     public ArrayList<Object> consultarMovimientos(Date fecha) {
         ArrayList<Object> movimientos = new ArrayList<>();
 
-
         for (Compras compra : registroCompras) {
             if (compra.getFechaCompra().equals(fecha)) {
                 movimientos.add(compra);
             }
         }
-
 
         for (Factura factura : registroVentas) {
             if (factura.getFecha().equals(fecha)) {

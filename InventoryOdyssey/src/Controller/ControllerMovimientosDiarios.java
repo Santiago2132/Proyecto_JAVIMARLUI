@@ -13,12 +13,12 @@ public class ControllerMovimientosDiarios {
         movimientosDiarios = new MovimientosDiarios();
     }
 
-    public void registrarCompra(Compras compra) {
-        movimientosDiarios.registrarCompra(compra);
+    public boolean registrarCompra(Compras compra) {
+        return movimientosDiarios.registrarCompra(compra);
     }
 
-    public void registrarVenta(Factura factura) {
-        movimientosDiarios.registrarVenta(factura);
+    public boolean registrarVenta(Factura factura) {
+        return movimientosDiarios.registrarVenta(factura);
     }
 
     public ArrayList<Compras> getRegistroCompras() {

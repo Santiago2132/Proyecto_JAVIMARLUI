@@ -103,7 +103,7 @@ public class VentanaAggEmpleado extends JFrame {
         cajaNombre.setBounds(350,130,220,30);
         informacionEmpleado.add(cajaNombre);
 
-        JLabel idEmpleado = new JLabel("Identificación:");
+        JLabel idEmpleado = new JLabel("Nombre usuario:");
         idEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
         idEmpleado.setBounds(120,210,150,20);
         idEmpleado.setForeground(Color.BLACK);
@@ -113,7 +113,7 @@ public class VentanaAggEmpleado extends JFrame {
         cajaId.setBounds(350,210,220,30);
         informacionEmpleado.add(cajaId);
 
-        JLabel telefonoEmpleado = new JLabel("Teléfono:");
+        JLabel telefonoEmpleado = new JLabel("Contraseña:");
         telefonoEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
         telefonoEmpleado.setBounds(120,290,150,20);
         telefonoEmpleado.setForeground(Color.BLACK);
@@ -123,7 +123,7 @@ public class VentanaAggEmpleado extends JFrame {
         cajaTelefono.setBounds(350,290,220,30);
         informacionEmpleado.add(cajaTelefono);
 
-        JLabel direccionEmpleado = new JLabel("Dirección:");
+        JLabel direccionEmpleado = new JLabel("Correo");
         direccionEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
         direccionEmpleado.setBounds(120,370,150,20);
         direccionEmpleado.setForeground(Color.BLACK);
@@ -133,7 +133,7 @@ public class VentanaAggEmpleado extends JFrame {
         cajaDireccion.setBounds(350,370,220,30);
         informacionEmpleado.add(cajaDireccion);
 
-        JLabel correoEmpleado = new JLabel("Correo:");
+        JLabel correoEmpleado = new JLabel("Rol:");
         correoEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
         correoEmpleado.setBounds(120,450,150,20);
         correoEmpleado.setForeground(Color.BLACK);

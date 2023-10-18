@@ -8,8 +8,8 @@ import java.util.Date;
 public class ControllerAdministrador {
     //Crea los usuarios con esa cantidad de atributos, lo demás de la clase esta por agregado de persona.
     public boolean crearUsuario(String nombre,String nombreUsuario,String password, String correo, int rol){//Funciones con usuario
-        boolean creado = false;//falta la consulta 3 condicionales que dependen del modelo
-        Usuario newUsuario  = new Usuario();
+        boolean creado = false;
+
         creado = true;
         return creado;
     }

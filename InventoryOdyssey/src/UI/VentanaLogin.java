@@ -120,8 +120,9 @@ public class VentanaLogin extends JFrame {
         Icon iconAdmin = new ImageIcon(imgadmin.getImage().getScaledInstance(botonLogin.getWidth(), botonLogin.getHeight(), Image.SCALE_SMOOTH));
         botonLogin.setRolloverIcon(iconAdmin);
         panelFondoInfo.add(botonLogin);
-
+        
         botonLogin.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = cajaUsuario.getText();
@@ -136,9 +137,12 @@ public class VentanaLogin extends JFrame {
 
                     }else if(rol ==3 ){
 
+                    }else {
+
                     }
                 }else {
-                    System.out.println("Contraseña incorrecta");
+                    cajaUsuario.setText(""); // Esto limpia el campo de texto
+                    passwordField.setText(""); // Esto limpia el campo de contraseña
                 }
 
             }

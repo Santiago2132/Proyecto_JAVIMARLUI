@@ -11,7 +11,7 @@ public class Encriptador {
     private static final String CLAVE_POR_DEFECTO = "clavePorDefecto";
 
     // Método para encriptar utilizando AES
-    public static String encriptar(String texto) throws Exception {
+    public  String encriptar(String texto) throws Exception {
         return encriptar(texto, CLAVE_POR_DEFECTO);
     }
 
@@ -27,12 +27,12 @@ public class Encriptador {
     }
 
     // Método para desencriptar utilizando AES
-    public static String desencriptar(String textoEncriptado) throws Exception {
+    public  String desencriptar(String textoEncriptado) throws Exception {
         return desencriptar(textoEncriptado, CLAVE_POR_DEFECTO);
     }
 
     // Método para desencriptar utilizando AES
-    public static String desencriptar(String textoEncriptado, String clave) throws Exception {
+    public  static String desencriptar(String textoEncriptado, String clave) throws Exception {
         SecretKeySpec claveSecreta = generarClaveSecreta(clave);
 
         Cipher cifrador = Cipher.getInstance("AES");
@@ -54,6 +54,7 @@ public class Encriptador {
     }
 
     public static void main(String[] args) {
+        /*
         try {
             String textoOriginal = "¡Hola Mundo! 123";
 
@@ -65,5 +66,7 @@ public class Encriptador {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+         */
     }
 }

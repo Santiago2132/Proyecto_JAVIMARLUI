@@ -11,7 +11,7 @@ public class ControllerAdministrador {
     //Crea los usuarios con esa cantidad de atributos, lo demás de la clase esta por agregado de persona.
 
     UsuarioModel usuarioModel = new UsuarioModel();
-    public boolean crearUsuario(String nombre,String nombreUsuario,String password, String correo, int rol){//Funciones con usuario
+    public boolean crearUsuario(String nombre,String nombreUsuario,String password, String correo, int rol) throws Exception {//Funciones con usuario
 
         return usuarioModel.agregarUsuarioT(nombre,nombreUsuario,password,correo,rol);
     }

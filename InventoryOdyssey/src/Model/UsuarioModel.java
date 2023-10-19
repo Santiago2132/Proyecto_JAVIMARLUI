@@ -1,4 +1,6 @@
 package Model;
+import Security.Encriptador;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,6 +8,7 @@ import javax.swing.JOptionPane;
 
 public class UsuarioModel {
     public static BaseDatos conexion = new BaseDatos();
+    private Encriptador encriptador = new Encriptador();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
     public static String mysql;
@@ -43,7 +46,10 @@ public class UsuarioModel {
         }
         return resultado;
     }
-    public boolean agregarUsuarioT(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) {
+    public boolean agregarUsuarioT(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) throws Exception {
+        String passwordEncrip = encriptador.encriptar(contrasena);
+        contrasena=passwordEncrip;
+        System.out.println(contrasena);
         boolean exito = false;
         Connection conexion = null;
         String query = "INSERT INTO USUARIO (NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?)";

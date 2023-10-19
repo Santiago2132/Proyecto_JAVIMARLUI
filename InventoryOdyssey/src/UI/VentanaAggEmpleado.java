@@ -188,7 +188,11 @@ public class VentanaAggEmpleado extends JFrame {
                 String id = cajaId.getText();
                 String telefono = cajaTelefono.getText();
                 String direccion = cajaDireccion.getText();
-                admin.crearUsuario(nombre,id,telefono,direccion,rol);
+                try {
+                    admin.crearUsuario(nombre,id,telefono,direccion,rol);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
                 cajaNombre.setText("");
                 cajaId.setText("");
                 cajaTelefono.setText("");

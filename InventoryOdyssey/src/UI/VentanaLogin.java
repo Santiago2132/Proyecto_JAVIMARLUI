@@ -130,22 +130,26 @@ public class VentanaLogin extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String nombre = cajaUsuario.getText();
                 String contraseña = new String(passwordField.getPassword());
-                if(controlDeAcceso.login(nombre,contraseña)==true){
-                    int rol = controlDeAcceso.rol(nombre);
-                    if(rol ==  1){
-                        VentanaInventario ventanaInventario =  new VentanaInventario();
-                        ventanaInventario.setVisible(true);
-                        dispose();
-                    }else if(rol == 2){
+                try {
+                    if(controlDeAcceso.login(nombre,contraseña)==true){
+                        int rol = controlDeAcceso.rol(nombre);
+                        if(rol ==  1){
+                            VentanaInventario ventanaInventario =  new VentanaInventario();
+                            ventanaInventario.setVisible(true);
+                            dispose();
+                        }else if(rol == 2){
 
-                    }else if(rol ==3 ){
+                        }else if(rol ==3 ){
 
+                        }else {
+
+                        }
                     }else {
-
+                        cajaUsuario.setText(""); // Esto limpia el campo de texto
+                        passwordField.setText(""); // Esto limpia el campo de contraseña
                     }
-                }else {
-                    cajaUsuario.setText(""); // Esto limpia el campo de texto
-                    passwordField.setText(""); // Esto limpia el campo de contraseña
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
                 }
 
             }

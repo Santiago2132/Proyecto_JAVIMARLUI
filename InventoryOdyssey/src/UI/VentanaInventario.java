@@ -100,8 +100,8 @@ public class VentanaInventario extends JFrame {
         botonReportes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaProveedores ventanaProv =  new VentanaProveedores();
-                ventanaProv.setVisible(true);
+                VentanaReportes ventanaReportes = new VentanaReportes();
+                ventanaReportes.setVisible(true);
                 dispose();
             }
         });
@@ -111,6 +111,16 @@ public class VentanaInventario extends JFrame {
         botonProveedores.setBackground(Color.WHITE);
         botonProveedores.setBorderPainted(false);
         panelInvisble.add(botonProveedores);
+
+        botonProveedores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TablaProveedoresPersonalizada ventana = new TablaProveedoresPersonalizada();
+                ventana.setVisible(true);
+                dispose();
+            }
+        });
+
 
         JButton botonAggPro = new JButton("AGREGAR PRODUCTO");
         botonAggPro.setBounds(350,24,170,40);

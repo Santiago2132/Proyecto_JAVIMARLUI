@@ -11,7 +11,6 @@ public class ControlDeAcceso {
 
     //Methods
     public boolean login(String name, String password){
-        Usuario usuario = new Usuario(name, password);
         if(usuariomodelo.validarUsuario(name, password)) {
             return true;
         }else {

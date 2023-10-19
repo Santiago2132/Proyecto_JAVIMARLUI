@@ -11,7 +11,8 @@ public class ControllerProductos {
     ProductoModel productoModel = new ProductoModel();
 
     public boolean crearProductoBasico(double precio, double iva) throws SQLException, IOException {
-        return productoModel.agregarProducto(precio,iva);
+        return false;
+        //productoModel.agregarProducto(precio,iva);
     }
 
 

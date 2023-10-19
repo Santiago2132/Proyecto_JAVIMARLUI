@@ -38,16 +38,17 @@ public class ProductoModel {
 
     /*MÉTODOS*/
 
-    public int agregarProducto(double precio, Blob imagen, double iva) {
+    public int agregarProducto(double precio, int cantidad, Blob imagen, double iva) {
         int resultado = 0;
         Connection conexion = null;
-        String query = "INSERT INTO PRODUCTO (PRECIO, IMAGEN, IVA) VALUES (?, ?, ?)";
+        String query = "INSERT INTO PRODUCTO (PRECIO, CANTIDAD, IMAGEN, IVA) VALUES (?, ?, ?, ?)";
         try {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
             pstmt.setDouble(1, precio);
-            pstmt.setBlob(2, imagen);
-            pstmt.setDouble(3, iva);
+            pstmt.setInt(2, cantidad);
+            pstmt.setBlob(3, imagen);
+            pstmt.setDouble(4, iva);
             resultado = pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
             pstmt.close();
@@ -55,22 +56,20 @@ public class ProductoModel {
             System.out.println(e);
         }
         return resultado;
-    }
-    public boolean agregarProducto(double precio, double iva) {
+    }public boolean agregarProducto(double precio, int cantidad, double iva) {
         boolean resultado = false;
         Connection conexion = null;
-        String query = "INSERT INTO PRODUCTO (PRECIO, IMAGEN, IVA) VALUES (?, ?, ?)";
+        String query = "INSERT INTO PRODUCTO (PRECIO, CANTIDAD, IMAGEN, IVA) VALUES (?, ?, ?, ?)";
         try {
             conexion = BaseDatos.getConnection();
-            pstmt = conexion.prepareStatement(query);
+            PreparedStatement pstmt = conexion.prepareStatement(query);
             pstmt.setDouble(1, precio);
-
+            pstmt.setInt(2, cantidad);
             // Obtener la imagen desde una ruta predeterminada en caso de que no esté disponible
             String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
             Blob imagen = obtenerImagen(rutaImagen);
-            pstmt.setBlob(2, imagen);
-
-            pstmt.setDouble(3, iva);
+            pstmt.setBlob(3, imagen);
+            pstmt.setDouble(4, iva);
             int filasAfectadas = pstmt.executeUpdate();
             if (filasAfectadas > 0) {
                 JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
@@ -79,6 +78,14 @@ public class ProductoModel {
             pstmt.close();
         } catch (Exception e) {
             System.out.println(e);
+        } finally {
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException e) {
+                    System.out.println("Error al cerrar la conexión: " + e.getMessage());
+                }
+            }
         }
         return resultado;
     }
@@ -104,14 +111,14 @@ public class ProductoModel {
         return resultado;
     }
 
-    //metodo para modificar el producto por precio y el iva, pero que el iva sea opcional si el usuario lo desea
-    public int modificarProducto(int idProducto, double nuevoPrecio, Double nuevoIva) {
+    //metodo para modificar el producto por precio, el iva, la cantidad, pero que el iva y cantidad sea opcional si el usuario lo desea
+    public int modificarProducto(int idProducto, int nuevaCantidad, double nuevoPrecio, Double nuevoIva) {
         int resultado = 0;
         Connection conexion = null;
         String query;
         if (nuevoIva != null) {
             // Si se proporciona un nuevo valor de IVA, actualiza también el IVA
-            query = "UPDATE PRODUCTO SET PRECIO = ?, IVA = ? WHERE ID_PRODUCTO = ?";
+            query = "UPDATE PRODUCTO SET PRECIO = ?, CANTIDAD = ?, IVA = ? WHERE ID_PRODUCTO = ?";
         } else {
             // Si no se proporciona un valor de IVA, solo actualiza el precio
             query = "UPDATE PRODUCTO SET PRECIO = ? WHERE ID_PRODUCTO = ?";
@@ -121,8 +128,9 @@ public class ProductoModel {
             pstmt = conexion.prepareStatement(query);
             pstmt.setDouble(1, nuevoPrecio);
             if (nuevoIva != null) {
-                pstmt.setDouble(2, nuevoIva);
-                pstmt.setInt(3, idProducto);
+                pstmt.setInt(2, nuevaCantidad);
+                pstmt.setDouble(3, nuevoIva);
+                pstmt.setInt(4, idProducto);
             } else {
                 pstmt.setInt(2, idProducto);
             }
@@ -139,14 +147,12 @@ public class ProductoModel {
         return resultado;
     }
 
-
-
     public static void main (String[] args) throws IOException, SQLException {
         String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
         Blob imagen = obtenerImagen(rutaImagen);
         ProductoModel producto = new ProductoModel();
-        //int resultadoAgregar = producto.agregarProducto(19.99, imagen, 0.19);
-        //int resultadoEliminar = producto.eliminarProducto(3);
-        // int resultadoModificar = producto.modificarProducto(1, 20.00, 0.19);
+        boolean resultadoAgregar = producto.agregarProducto(49.99, 20, 0.19);
+        //int resultadoEliminar = producto.eliminarProducto(1);
+        // int resultadoModificar = producto.modificarProducto(1, 2 ,20.00, 0.19);
     }
 }

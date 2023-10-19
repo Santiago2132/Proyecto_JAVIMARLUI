@@ -7,7 +7,7 @@ public class MetodoPago {
     public static ResultSet resultado;
     public static String mysql;
 
-    public int agregarMetodoPago(int idBanco, String tipoPago, String descripcion) {
+    public int agregarMetodoPago(int idBanco, int tipoPago, String descripcion) {
         Connection conexion = null;
         PreparedStatement pstmt = null;
         int resultado = -1;  // Valor por defecto en caso de fallo
@@ -16,7 +16,7 @@ public class MetodoPago {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, idBanco);
-            pstmt.setString(2, tipoPago);
+            pstmt.setInt(2, tipoPago);
             pstmt.setString(3, descripcion);
             int filasAfectadas = pstmt.executeUpdate();
             if (filasAfectadas > 0) {
@@ -71,7 +71,7 @@ public class MetodoPago {
         return resultado;
     }
 
-    public int modificarMetodoPago(int idMetodoPago, int idBanco, String tipoPago, String descripcion) {
+    public int modificarMetodoPago(int idMetodoPago, int idBanco, int tipoPago, String descripcion) {
         Connection conexion = null;
         PreparedStatement pstmt = null;
         int resultado = -1;  // Valor por defecto en caso de fallo
@@ -80,7 +80,7 @@ public class MetodoPago {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
             pstmt.setInt(1, idBanco);
-            pstmt.setString(2, tipoPago);
+            pstmt.setInt(2, tipoPago);
             pstmt.setString(3, descripcion);
             pstmt.setInt(4, idMetodoPago);
             int filasAfectadas = pstmt.executeUpdate();
@@ -105,9 +105,9 @@ public class MetodoPago {
 
     public static void main (String[] args){
         MetodoPago metodoPago = new MetodoPago();
-        //int resultadoAgregar = metodoPago.agregarMetodoPago(1, "CREDITO", "3 Coutas");
+        int resultadoAgregar = metodoPago.agregarMetodoPago(1,1,  "3 Coutas");
         //int resultadoEliminar = metodoPago.eliminarMetodoPago(1);
-        //int resultadoModificar = metodoPago.modificarMetodoPago(1, 1, "DEBITO", "2 Coutas");
+        //int resultadoModificar = metodoPago.modificarMetodoPago(1, 1, 1, "2 Coutas");
     }
 
 }

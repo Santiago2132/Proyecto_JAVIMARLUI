@@ -25,18 +25,19 @@ public class DetalleEmpresa {
         return imagenBlob;
     }
 
-    public int agregarDetalleEmpresa(String nombre, Blob logo, String direccion, String telefono) {
+    public int agregarDetalleEmpresa(int nitEmpresa,String nombre, Blob logo, String direccion, String telefono) {
         Connection conexion = null;
         PreparedStatement pstmt = null;
         int resultado = -1;  // Valor por defecto en caso de fallo
-        String query = "INSERT INTO DETALLE_EMPRESA (NOMBRE, LOGO, DIRECCION, TELEFONO) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO DETALLE_EMPRESA (NIT_EMPRESA,NOMBRE, LOGO, DIRECCION, TELEFONO) VALUES (?, ?, ?, ?, ?)";
         try {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, nombre);
-            pstmt.setBlob(2, logo);
-            pstmt.setString(3, direccion);
-            pstmt.setString(4, telefono);
+            pstmt.setInt(1, nitEmpresa);
+            pstmt.setString(2, nombre);
+            pstmt.setBlob(3, logo);
+            pstmt.setString(4, direccion);
+            pstmt.setString(5, telefono);
             int filasAfectadas = pstmt.executeUpdate();
             if (filasAfectadas > 0) {
                 JOptionPane.showMessageDialog(null, "Detalle de empresa agregado correctamente.");
@@ -128,7 +129,7 @@ public class DetalleEmpresa {
         String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
         Blob imagen = obtenerImagen(rutaImagen);
         DetalleEmpresa detalleEmpresa = new DetalleEmpresa();
-        //int resultadoAgregar = detalleEmpresa.agregarDetalleEmpresa("Bonita", imagen, "Callejuelas", "3152465875");
+        int resultadoAgregar = detalleEmpresa.agregarDetalleEmpresa(1, "Bonita", imagen, "Callejuelas", "3152465875");
         //int resultadoEliminar = detalleEmpresa.eliminarDetalleEmpresa(1);
         //int resultadoModificar = detalleEmpresa.modificarDetalleEmpresa(1, "Bonita1", imagen, "Callejuelas Apto", "3152460587");
     }

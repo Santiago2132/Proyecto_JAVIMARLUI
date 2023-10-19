@@ -183,9 +183,6 @@ public class VentanaInventario extends JFrame {
         });
     }
 
-
-
-
     public static void tablaProductos() {
         // Crear un modelo de tabla
         model = new DefaultTableModel();
@@ -247,8 +244,6 @@ public class VentanaInventario extends JFrame {
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelInventario.add(panelConScroll, BorderLayout.CENTER);
     }
-
-
 
     public void panelContenedor() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

@@ -35,6 +35,9 @@ public class TablaProveedoresPersonalizada extends JFrame {
         panelFondo();
         panelInvisible();
         tablaProductos();
+        agregarFila(new Object []{"Proveedor 1","123124","3017781251","Empresa A","NIT-907560","pic@gmail.com"});
+        agregarFila(new Object []{"Proveedor 2","097342","3058454585","Empresa B","NIT-209788","jummm@gmail.com"});
+        agregarFila(new Object []{"Proveedor 3","678320","3180416548","Empresa C","NIT-867873","asdas@gmail.com"});
     }
     public void panelFondo(){
         panelFondo.setLayout(null);
@@ -123,6 +126,13 @@ public class TablaProveedoresPersonalizada extends JFrame {
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelFondo.add(panelConScroll, BorderLayout.CENTER);
+    }
+
+    // Método para agregar una fila de objetos a la tabla
+    public void agregarFila(Object[] objetos) {
+        // Agrega una fila con los objetos al modelo de la tabla
+        model.addRow(objetos);
+        // Llenar la tabla con datos de la lista
     }
 
     public void panelContenedor(){

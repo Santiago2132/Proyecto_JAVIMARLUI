@@ -27,16 +27,17 @@ public class Banco {
         return imagenBlob;
     }
 
-    public int agregarBanco(String nombre, Blob icono) {
+    public int agregarBanco(int idBanco, String nombre, Blob icono) {
         Connection conexion = null;
         PreparedStatement pstmt = null;
         int resultado = -1;  // Valor por defecto en caso de fallo
-        String query = "INSERT INTO BANCO (NOMBRE, ICONO) VALUES (?, ?)";
+        String query = "INSERT INTO BANCO (NIT_BANCO,NOMBRE, ICONO) VALUES (?, ?, ?)";
         try {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, nombre);
-            pstmt.setBlob(2, icono);
+            pstmt.setInt(1, idBanco);
+            pstmt.setString(2, nombre);
+            pstmt.setBlob(3, icono);
             int filasAfectadas = pstmt.executeUpdate();
             if (filasAfectadas > 0) {
                 JOptionPane.showMessageDialog(null,"Banco agregado correctamente.");
@@ -124,7 +125,7 @@ public class Banco {
         String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
         Blob imagen = obtenerImagen(rutaImagen);
         Banco banco = new Banco();
-        //int resultadoAgregar = banco.agregarBanco("Bancolombia", imagen);
+        int resultadoAgregar = banco.agregarBanco(1, "Bancolombia", imagen);
         //int resultadoEliminar = banco.eliminarBanco(1);
         //int resultadoModificar = banco.modificarBanco(1, "Banco de Colombia", imagen);
 

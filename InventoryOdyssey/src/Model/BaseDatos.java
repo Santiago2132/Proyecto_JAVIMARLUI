@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class BaseDatos {
     private static String driver="com.mysql.cj.jdbc.Driver";
     private static String usuario="root";
-    private static String contrasena ="1098630136";
+    private static String contrasena ="patricia";
     private static String url = "jdbc:mysql://localhost:3306/inventoryodissey";
 
     static {

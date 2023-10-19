@@ -164,12 +164,12 @@ public class Inventario {
 
     public static void main (String[] args){
         Inventario inventario = new Inventario();
-        //int resultadoAgregar = inventario.agregarEnInventario(1, 1, "Puntilla", "Tornillos y adhesivos", 10, 15.00, "Puntilla Con Cabeza 3pg 500g" );
+        int resultadoAgregar = inventario.agregarEnInventario(1, 1, "Puntilla", "Tornillos y adhesivos", 10, 15.00, "Puntilla Con Cabeza 3pg 500g" );
         //int resultadoEliminar = inventario.eliminarDeInventario(1);
         //int resultadoModificar = inventario.modificarEnInventario(1, 9, 75.00);
 
         // Llama al método para obtener la información del inventario
-        List<InformacionInventario> informacion = inventario.obtenerInformacionInventario();
+        /*List<InformacionInventario> informacion = inventario.obtenerInformacionInventario();
         // Itera a través de la lista de InformacionInventario y muestra la información
         for (InformacionInventario info : informacion) {
             System.out.println("ID Inventario: " + info.getIdInventario());
@@ -178,6 +178,6 @@ public class Inventario {
             System.out.println("Precio de Compra: " + info.getPrecioCompra());
             System.out.println("Cantidad en Stock: " + info.getCantidadStock());
             System.out.println();
-        }
+        }*/
     }
 }

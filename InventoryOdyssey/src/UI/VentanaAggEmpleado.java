@@ -160,23 +160,6 @@ public class VentanaAggEmpleado extends JFrame {
         comboRoles.setBounds(350, 450, 220, 30);
         informacionEmpleado.add(comboRoles);
 
-        int rol;
-        String rolSeleccionado = (String) comboRoles.getSelectedItem();
-        switch (rolSeleccionado) {
-            case "Administrador":
-                rol = 1;
-                break;
-            case "Vendedor":
-                rol = 2;
-                break;
-            case "Bodeguero":
-                rol = 3;
-                break;
-            default:
-                rol = 0; // Manejar un valor por defecto si no coincide ninguna opción
-        }
-
-
         JButton botonAgregar =  new JButton("Agregar Empleado");
         botonAgregar.setBounds(1015,520,150,50);
         botonAgregar.setBackground(Color.white);
@@ -188,6 +171,21 @@ public class VentanaAggEmpleado extends JFrame {
                 String id = cajaId.getText();
                 String telefono = cajaTelefono.getText();
                 String direccion = cajaDireccion.getText();
+                int rol;
+                String rolSeleccionado = (String) comboRoles.getSelectedItem();
+                switch (rolSeleccionado) {
+                    case "Administrador":
+                        rol = 1;
+                        break;
+                    case "Vendedor":
+                        rol = 2;
+                        break;
+                    case "Bodeguero":
+                        rol = 3;
+                        break;
+                    default:
+                        rol = 0; // Manejar un valor por defecto si no coincide ninguna opción
+                }
                 try {
                     admin.crearUsuario(nombre,id,telefono,direccion,rol);
                 } catch (Exception ex) {

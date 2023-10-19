@@ -9,7 +9,8 @@ import java.util.List;
 
 public class InventarioDAO {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/inventario";
+    private static final String URL = "jdbc:mysql://localhost:3306/inventario";//Para no hacer conexion RMI cambiar a una
+    //Implementación
     private static final String USERNAME = "root";
     private static final String PASSWORD = "1098630136";
     private Encriptador encriptador = new Encriptador();

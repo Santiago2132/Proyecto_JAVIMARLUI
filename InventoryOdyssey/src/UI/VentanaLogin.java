@@ -138,7 +138,9 @@ public class VentanaLogin extends JFrame {
                             ventanaInventario.setVisible(true);
                             dispose();
                         }else if(rol == 2){
-
+                            VentanaFactura ventanaFactura = new VentanaFactura();
+                            ventanaFactura.setVisible(true);
+                            dispose();
                         }else if(rol ==3 ){
 
                         }else {

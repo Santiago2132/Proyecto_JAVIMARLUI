@@ -79,6 +79,19 @@ public class VentanaAggProducto extends JFrame {
         precioUnitario.setBounds(120,330,200,20);
         precioUnitario.setForeground(Color.BLACK);
         panelInformacion.add(precioUnitario);
+        JButton botonVolver =  new JButton("<-");
+        botonVolver.setBounds(1100,20,60,55);
+        botonVolver.setBackground(Color.white);
+        panelInformacion.add(botonVolver);
+
+        botonVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaInventario ventanaInventario =  new VentanaInventario();
+                ventanaInventario.setVisible(true);
+                dispose();
+            }
+        });
 
         JTextField cajaPrecio = new JTextField();
         cajaPrecio.setBounds(375,330,220,30);

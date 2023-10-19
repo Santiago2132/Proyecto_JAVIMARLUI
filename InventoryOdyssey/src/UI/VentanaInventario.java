@@ -1,7 +1,4 @@
 package UI;
-
-import Model.InventarioModel;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -15,9 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VentanaInventario extends JFrame {
-    InventarioModel inventarioModel = new InventarioModel();
 
-   public static void main (String []args){
+    public static void main (String []args){
         VentanaInventario ventanaInventario = new VentanaInventario();
         ventanaInventario.setVisible(true);
     }
@@ -41,6 +37,9 @@ public class VentanaInventario extends JFrame {
         panelInventario();
         panelInvisible();
         tablaProductos();
+        agregarProducto("1", "REF001", "Producto 1", "Descripción 1", "$10.00", "5", "Proveedor A");
+        agregarProducto("2", "REF002", "Producto 2", "Descripción 2", "$15.00", "8", "Proveedor B");
+        agregarProducto("3", "REF003", "Producto 3", "Descripción 3", "$20.00", "10", "Proveedor C");
     }
 
     public void panelInventario(){
@@ -115,12 +114,23 @@ public class VentanaInventario extends JFrame {
         botonProveedores.setBorderPainted(false);
         panelInvisble.add(botonProveedores);
 
-        JButton botonEmpleadoMes = new JButton("AGREGAR PRODUCTO");
-        botonEmpleadoMes.setBounds(350,24,170,40);
-        botonEmpleadoMes.setBackground(Color.WHITE);
-        botonEmpleadoMes.setBorderPainted(false);
-        panelInvisble.add(botonEmpleadoMes);
-        botonEmpleadoMes.addActionListener(new ActionListener() {
+        botonProveedores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TablaProveedoresPersonalizada ventana = new TablaProveedoresPersonalizada();
+                ventana.setVisible(true);
+                dispose();
+            }
+        });
+
+
+        JButton botonAggPro = new JButton("AGREGAR PRODUCTO");
+        botonAggPro.setBounds(350,24,170,40);
+        botonAggPro.setBackground(Color.WHITE);
+        botonAggPro.setBorderPainted(false);
+        panelInvisble.add(botonAggPro);
+
+        botonAggPro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 VentanaAggProducto ventanaAggProducto = new VentanaAggProducto();
@@ -155,6 +165,21 @@ public class VentanaInventario extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 VentanaAggEmpleado ventanaAggEmp = new VentanaAggEmpleado();
                 ventanaAggEmp.setVisible(true);
+                dispose();
+            }
+        });
+
+        JButton botonDelEmpleado = new JButton("ELIMINAR EMPLEADO");
+        botonDelEmpleado.setBounds(950,24,180,40);
+        botonDelEmpleado.setBackground(Color.WHITE);
+        botonDelEmpleado.setBorderPainted(false);
+        panelInvisble.add(botonDelEmpleado);
+
+        botonDelEmpleado.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaDelEmpleado ventanaDelEmpleado = new VentanaDelEmpleado();
+                ventanaDelEmpleado.setVisible(true);
                 dispose();
             }
         });
@@ -226,7 +251,6 @@ public class VentanaInventario extends JFrame {
         Object[] fila = {id, referencia, producto, descripcion, precio, cantidad, proveedor};
         model.addRow(fila);
     }
-
 
 
     public void panelContenedor() {

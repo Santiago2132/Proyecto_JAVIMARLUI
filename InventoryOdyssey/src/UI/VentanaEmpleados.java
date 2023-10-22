@@ -9,12 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VentanaDelEmpleado extends JFrame {
+public class VentanaEmpleados extends JFrame {
     public static void main (String []args){
-        VentanaDelEmpleado ventanaDelEmpleado = new VentanaDelEmpleado();
+        VentanaEmpleados ventanaDelEmpleado = new VentanaEmpleados();
         ventanaDelEmpleado.setVisible(true);
     }
 
@@ -22,13 +23,14 @@ public class VentanaDelEmpleado extends JFrame {
     static JPanel panelFondo = new JPanel();
     JPanel panelEncima = new JPanel();
     JPanel panelEncima2 = new JPanel();
+    public ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
 
 
     static JTable table = new JTable();
     static DefaultTableModel model = new DefaultTableModel();
 
-    public VentanaDelEmpleado(){
-        this.setTitle("INVENTORY ODYSSEY - ELIMIMAR EMPLEADO");
+    public VentanaEmpleados(){
+        this.setTitle("INVENTORY ODYSSEY - EMPLEADOS");
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(false);
@@ -38,8 +40,7 @@ public class VentanaDelEmpleado extends JFrame {
         panelEncima();
         panelEncima2();
         tablaEmpleados();
-        agregarFila(new Object []{"000492466","SEBASTIAN","CAJERO"});
-        agregarFila(new Object []{"000127874","ANTONIO","BODEGUERO"});
+
     }
 
 
@@ -52,13 +53,13 @@ public class VentanaDelEmpleado extends JFrame {
         panelFondo.setBackground(color);
 
         JLabel imagen = new JLabel();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Imagenes/despedido.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Imagenes/empleado.png"));
         Image icono = icon.getImage().getScaledInstance(68, 68, Image.SCALE_SMOOTH);
         imagen.setIcon(new ImageIcon(icono));
         imagen.setBounds(50,20,68,68);
         panelFondo.add(imagen);
 
-        JLabel titulo = new JLabel("ELIMINAR EMPLEADO");
+        JLabel titulo = new JLabel("EMPLEADOS");
         titulo.setFont(new Font("Rockwell",Font.BOLD,40));
         titulo.setBounds(150,40,600,32);
         titulo.setForeground(Color.BLACK);
@@ -85,7 +86,9 @@ public class VentanaDelEmpleado extends JFrame {
         model = new DefaultTableModel();
         model.addColumn("<html><div style='text-align: center;'>ID</div></html>\"");
         model.addColumn("<html><div style='text-align: center;'>NOMBRE<br>EMPLEADO</div></html>\"");
-        model.addColumn("<html><div style='text-align: center;'>TRABAJO</div></html>\"");
+        model.addColumn("<html><div style='text-align: center;'>TELÉFONO</div></html>\"");
+        model.addColumn("<html><div style='text-align: center;'>EMAIL</div></html>\"");
+
 
         // Configurar filas de diferentes alturas
         table = new JTable(model);
@@ -132,7 +135,7 @@ public class VentanaDelEmpleado extends JFrame {
         // Crea un nuevo panel para contener la tabla con la barra de desplazamiento
         JPanel panelConScroll = new JPanel(new BorderLayout());
         panelConScroll.add(scrollPane, BorderLayout.CENTER);
-        panelConScroll.setBounds(700, 112, 580, 520);
+        panelConScroll.setBounds(700, 112, 620, 520);
         panelConScroll.setBackground(Color.white);
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
@@ -144,6 +147,19 @@ public class VentanaDelEmpleado extends JFrame {
         // Agrega una fila con los objetos al modelo de la tabla
         model.addRow(objetos);
         // Llenar la tabla con datos de la lista
+    }
+
+    private void eliminarFilaPorId(String id) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int rowCount = model.getRowCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            String idEnFila = model.getValueAt(i, 0).toString(); // Suponiendo que la columna 0 contiene el ID
+            if (idEnFila.equals(id)) {
+                model.removeRow(i);
+                break; // Termina después de eliminar la fila
+            }
+        }
     }
 
     public void panelEncima(){
@@ -162,22 +178,127 @@ public class VentanaDelEmpleado extends JFrame {
         Color color = Color.decode("#4D4988");
         panelEncima2.setBackground(color);
 
-        JLabel titulo = new JLabel("ID EMPLEADO");
-        titulo.setFont(new Font("Rockwell",Font.BOLD,30));
-        titulo.setBounds(160,160,600,32);
-        titulo.setForeground(Color.WHITE);
-        panelEncima2.add(titulo);
+        JLabel nombreEmpleado = new JLabel("Nombre:");
+        nombreEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
+        nombreEmpleado.setBounds(55,80,150,20);
+        nombreEmpleado.setForeground(Color.WHITE);
+        panelEncima2.add(nombreEmpleado);
 
-        JTextField cajaIdEmpleado = new JTextField();
-        cajaIdEmpleado.setBounds(157,230,220,30);
-        panelEncima2.add(cajaIdEmpleado);
+        JTextField cajaNombre = new JTextField();
+        cajaNombre.setBounds(220,80,220,25);
+        panelEncima2.add(cajaNombre);
 
-        JButton botonEliminar = new JButton("ELIMINAR");
-        botonEliminar.setBounds(156,290,221,40);
+        JLabel idEmpleado = new JLabel("ID:");
+        idEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
+        idEmpleado.setBounds(55,110,150,20);
+        idEmpleado.setForeground(Color.WHITE);
+        panelEncima2.add(idEmpleado);
+
+        JTextField cajaId = new JTextField();
+        cajaId.setBounds(220,110,220,25);
+        panelEncima2.add(cajaId);
+
+        JLabel telefonoEmpleado = new JLabel("Teléfono:");
+        telefonoEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
+        telefonoEmpleado.setBounds(55,140,150,20);
+        telefonoEmpleado.setForeground(Color.WHITE);
+        panelEncima2.add(telefonoEmpleado);
+
+        JTextField cajaTelefono = new JTextField();
+        cajaTelefono.setBounds(220,140,220,25);
+        panelEncima2.add(cajaTelefono);
+
+        JLabel emailEmpleado = new JLabel("Email:");
+        emailEmpleado.setFont(new Font("Rockwell",Font.BOLD,20));
+        emailEmpleado.setBounds(55,170,150,20);
+        emailEmpleado.setForeground(Color.WHITE);
+        panelEncima2.add(emailEmpleado);
+
+        JTextField cajaEmail = new JTextField();
+        cajaEmail.setBounds(220,170,220,25);
+        panelEncima2.add(cajaEmail);
+
+        JButton botonAgg = new JButton("AGREGAR EMPLEADO");
+        botonAgg.setBounds(55,220,383,40);
+        botonAgg.setBackground(Color.WHITE);
+        botonAgg.setBorderPainted(false);
+        panelEncima2.add(botonAgg);
+
+        botonAgg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = cajaNombre.getText();
+                String id = cajaId.getText();
+                String telefono = cajaTelefono.getText();
+                String email = cajaEmail.getText();
+
+                // Crea un objeto Empleado con los valores
+                Empleado empleado = new Empleado(id, nombre, telefono, email);
+
+                // Agrega el empleado a la lista
+                listaEmpleados.add(empleado);
+
+                // Agrega el empleado a la tabla
+                agregarFila(new Object[]{empleado.getId(), empleado.getNombre(), empleado.getTelefono(), empleado.getEmail()});
+
+                // Limpia los JTextField
+                cajaNombre.setText("");
+                cajaId.setText("");
+                cajaTelefono.setText("");
+                cajaEmail.setText("");
+            }
+        });
+
+        JLabel nombreEmpleado1 = new JLabel("ID:");
+        nombreEmpleado1.setFont(new Font("Rockwell",Font.BOLD,20));
+        nombreEmpleado1.setBounds(55,330,150,20);
+        nombreEmpleado1.setForeground(Color.WHITE);
+        panelEncima2.add(nombreEmpleado1);
+
+        JTextField cajaNombre1 = new JTextField();
+        cajaNombre1.setBounds(220,330,220,25);
+        panelEncima2.add(cajaNombre1);
+
+        JButton botonEliminar = new JButton("ELIMINAR EMPLEADO");
+        botonEliminar.setBounds(55,390,383,40);
         botonEliminar.setBackground(Color.WHITE);
         botonEliminar.setBorderPainted(false);
         panelEncima2.add(botonEliminar);
+
+        botonEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtén el ID del empleado a eliminar desde el JTextField cajaNombre1
+                String idAEliminar = cajaNombre1.getText();
+
+                // Llama a un método para eliminar el empleado de la lista y de la tabla
+                eliminarEmpleadoPorId(idAEliminar);
+
+                // Limpia el JTextField cajaNombre1
+                cajaNombre1.setText("");
+            }
+        });
     }
+
+    private void eliminarEmpleadoPorId(String id) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int rowCount = model.getRowCount();
+        boolean empleadoEncontrado = false;
+
+        for (int i = 0; i < rowCount; i++) {
+            String idEnFila = model.getValueAt(i, 0).toString(); // Suponiendo que la columna 0 contiene el ID
+            if (idEnFila.equals(id)) {
+                model.removeRow(i);
+                empleadoEncontrado = true;
+                break; // Termina después de eliminar la fila
+            }
+        }
+
+        if (!empleadoEncontrado) {
+            JOptionPane.showMessageDialog(this, "Empleado no existe", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     public void panelContenedor() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 

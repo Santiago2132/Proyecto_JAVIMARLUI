@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class VentanaInventario extends JFrame {
     JPanel panelInvisble = new JPanel();
     JLabel fondo = new JLabel();
     JMenuBar menuBar = new JMenuBar();
+    public ArrayList<Producto> listaProductos = new ArrayList<>();
     static JTable table = new JTable();
     static DefaultTableModel model = new DefaultTableModel();
 
@@ -45,7 +47,98 @@ public class VentanaInventario extends JFrame {
         panelInventario.setLayout(null);
         panelInventario.setBounds(0, 85,1537,720);
         panelInventario.setOpaque(true);
-        panelInventario.setBackground(Color.white);
+        Color color = Color.decode("#100932");
+        panelInventario.setBackground(color);
+
+        JLabel titulo = new JLabel("AGREGAR PRODUCTO");
+        titulo.setFont(new Font("Rockwell",Font.BOLD,40));
+        titulo.setBounds(45,90,500,40);
+        titulo.setForeground(Color.WHITE);
+        panelInventario.add(titulo);
+
+        JLabel idProducto = new JLabel("ID:");
+        idProducto.setFont(new Font("Rockwell",Font.BOLD,20));
+        idProducto.setBounds(65,260,150,20);
+        idProducto.setForeground(Color.WHITE);
+        panelInventario.add(idProducto);
+
+        JTextField cajaID = new JTextField();
+        cajaID.setBounds(255,260,220,25);
+        panelInventario.add(cajaID);
+
+        JLabel nombreProducto = new JLabel("Producto:");
+        nombreProducto.setFont(new Font("Rockwell",Font.BOLD,20));
+        nombreProducto.setBounds(65,310,150,20);
+        nombreProducto.setForeground(Color.WHITE);
+        panelInventario.add(nombreProducto);
+
+        JTextField cajaNomPro = new JTextField();
+        cajaNomPro.setBounds(255,310,220,25);
+        panelInventario.add(cajaNomPro);
+
+        JLabel cantidadProducto = new JLabel("Cantidad:");
+        cantidadProducto.setFont(new Font("Rockwell",Font.BOLD,20));
+        cantidadProducto.setBounds(65,360,150,20);
+        cantidadProducto.setForeground(Color.WHITE);
+        panelInventario.add(cantidadProducto);
+
+        JTextField cajaCantidad = new JTextField();
+        cajaCantidad.setBounds(255,360,220,25);
+        panelInventario.add(cajaCantidad);
+
+        JLabel precioProducto = new JLabel("Precio Unidad:");
+        precioProducto.setFont(new Font("Rockwell",Font.BOLD,20));
+        precioProducto.setBounds(65,410,180,20);
+        precioProducto.setForeground(Color.WHITE);
+        panelInventario.add(precioProducto);
+
+        JTextField cajaPrecio = new JTextField();
+        cajaPrecio.setBounds(255,410,220,25);
+        panelInventario.add(cajaPrecio);
+
+        JLabel ivaProd = new JLabel("IVA %:");
+        ivaProd.setFont(new Font("Rockwell",Font.BOLD,20));
+        ivaProd.setBounds(65,460,180,20);
+        ivaProd.setForeground(Color.WHITE);
+        panelInventario.add(ivaProd);
+
+        JTextField cajaIva = new JTextField();
+        cajaIva.setBounds(255,460,220,25);
+        panelInventario.add(cajaIva);
+
+        JButton botonAgg = new JButton("AGREGAR PRODUCTO");
+        botonAgg.setBounds(65,545,404,40);
+        botonAgg.setBackground(Color.WHITE);
+        botonAgg.setBorderPainted(false);
+        panelInventario.add(botonAgg);
+
+        botonAgg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = cajaNomPro.getText();
+                String id = cajaID.getText();
+                String cantidad = cajaCantidad.getText();
+                String precioUnitario = cajaPrecio.getText();
+                String iva = cajaIva.getText();
+
+
+                // Crea un objeto Proveedor con los valores
+                Producto producto = new Producto(id, nombre, cantidad, precioUnitario, iva);
+
+                // Agrega el proveedor a la lista
+                listaProductos.add(producto);
+
+                // Agrega el proveeodr a la tabla
+                agregarFila(new Object[]{producto.getCodigo(), producto.getNombreProducto(), producto.getCantidad(),producto.getPrecioUnitario(),producto.getIva()});
+
+                // Limpia los JTextField
+                cajaNomPro.setText("");
+                cajaID.setText("");
+                cajaCantidad.setText("");
+                cajaIva.setText("");
+                cajaPrecio.setText("");
+            }
+        });
     }
 
     public void panelInvisible(){
@@ -85,29 +178,10 @@ public class VentanaInventario extends JFrame {
         // Agregar el JMenuBar al panelInvisible
         panelInvisble.add(menuBar);
 
-        JButton botonReportes = new JButton("REPORTES");
-        botonReportes.setBounds(40,24,120,40);
-        /*ImageIcon IReportes = new ImageIcon("src/Imagenes/BReportes.PNG");
-        Icon icon = new ImageIcon(IReportes.getImage().getScaledInstance(botonReportes.getWidth(),botonReportes.getHeight(), Image.SCALE_SMOOTH));
-        botonReportes.setIcon(icon);*/
-        botonReportes.setBackground(Color.WHITE);
-        botonReportes.setBorderPainted(false);
-        /*ImageIcon imagen = new ImageIcon("src/Imagenes/BRreportes.PNG");
-        Icon imagen1 = new ImageIcon(imagen.getImage().getScaledInstance(botonReportes.getWidth(), botonReportes.getHeight(), Image.SCALE_SMOOTH));
-        botonReportes.setRolloverIcon(imagen1);*/
-        panelInvisble.add(botonReportes);
 
-        botonReportes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VentanaReportes ventanaReportes = new VentanaReportes();
-                ventanaReportes.setVisible(true);
-                dispose();
-            }
-        });
 
         JButton botonProveedores = new JButton("PROVEEDORES");
-        botonProveedores.setBounds(180,24,150,40);
+        botonProveedores.setBounds(250,24,150,40);
         botonProveedores.setBackground(Color.WHITE);
         botonProveedores.setBorderPainted(false);
         panelInvisble.add(botonProveedores);
@@ -115,15 +189,15 @@ public class VentanaInventario extends JFrame {
         botonProveedores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TablaProveedoresPersonalizada ventana = new TablaProveedoresPersonalizada();
-                ventana.setVisible(true);
+                VentanaProveedores ventanaProveedores = new VentanaProveedores();
+                ventanaProveedores.setVisible(true);
                 dispose();
             }
         });
 
 
         JButton botonAggPro = new JButton("AGREGAR PRODUCTO");
-        botonAggPro.setBounds(350,24,170,40);
+        botonAggPro.setBounds(50,24,170,40);
         botonAggPro.setBackground(Color.WHITE);
         botonAggPro.setBorderPainted(false);
         panelInvisble.add(botonAggPro);
@@ -137,38 +211,9 @@ public class VentanaInventario extends JFrame {
             }
         });
 
-        JButton botonAggProv = new JButton("AGREGAR PROVEEDORES");
-        botonAggProv.setBounds(540,24,190,40);
-        botonAggProv.setBackground(Color.WHITE);
-        botonAggProv.setBorderPainted(false);
-        panelInvisble.add(botonAggProv);
 
-        botonAggProv.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VentanaAggProveedores ventanaAggProv =  new VentanaAggProveedores();
-                ventanaAggProv.setVisible(true);
-                dispose();
-            }
-        });
-
-        JButton botonAggEmpleado = new JButton("AGREGAR EMPLEADO");
-        botonAggEmpleado.setBounds(750,24,180,40);
-        botonAggEmpleado.setBackground(Color.WHITE);
-        botonAggEmpleado.setBorderPainted(false);
-        panelInvisble.add(botonAggEmpleado);
-
-        botonAggEmpleado.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VentanaAggEmpleado ventanaAggEmp = new VentanaAggEmpleado();
-                ventanaAggEmp.setVisible(true);
-                dispose();
-            }
-        });
-
-        JButton botonDelEmpleado = new JButton("ELIMINAR EMPLEADO");
-        botonDelEmpleado.setBounds(950,24,180,40);
+        JButton botonDelEmpleado = new JButton("EMPLEADOS");
+        botonDelEmpleado.setBounds(450,24,180,40);
         botonDelEmpleado.setBackground(Color.WHITE);
         botonDelEmpleado.setBorderPainted(false);
         panelInvisble.add(botonDelEmpleado);
@@ -176,7 +221,7 @@ public class VentanaInventario extends JFrame {
         botonDelEmpleado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaDelEmpleado ventanaDelEmpleado = new VentanaDelEmpleado();
+                VentanaEmpleados ventanaDelEmpleado = new VentanaEmpleados();
                 ventanaDelEmpleado.setVisible(true);
                 dispose();
             }
@@ -188,11 +233,10 @@ public class VentanaInventario extends JFrame {
         model = new DefaultTableModel();
         model.addColumn("<html><div style='text-align: center;'>ID<br>REFERENCIA</div></html>\"");
         model.addColumn("<html><div style='text-align: center;'>PRODUCTO</div></html>\"");
-        model.addColumn("<html><div style='text-align: center;'>DESCRIPCION</div></html>\"");
-        model.addColumn("<html><div style='text-align: center;'>PRECIO<br>UNIDAD</div></html>\"");
         model.addColumn("<html><div style='text-align: center;'>CANTIDAD</div></html>\"");
-        model.addColumn("<html><div style='text-align: center;'>PROVEEDOR</div></html>\"");
-        model.addColumn("<html><div style='text-align: center;'>FECH. REGISTRO</div></html>\"");
+        model.addColumn("<html><div style='text-align: center;'>PRECIO<br>UNIDAD</div></html>\"");
+        model.addColumn("<html><div style='text-align: center;'>IVA%</div></html>\"");
+
         // Configurar filas de diferentes alturas
         table = new JTable(model);
 
@@ -238,11 +282,18 @@ public class VentanaInventario extends JFrame {
         // Crea un nuevo panel para contener la tabla con la barra de desplazamiento
         JPanel panelConScroll = new JPanel(new BorderLayout());
         panelConScroll.add(scrollPane, BorderLayout.CENTER);
-        panelConScroll.setBounds(0, 0,1537,720);
+        panelConScroll.setBounds(560, 0,1000,720);
         panelConScroll.setBackground(Color.white);
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelInventario.add(panelConScroll, BorderLayout.CENTER);
+    }
+
+    // Método para agregar una fila de objetos a la tabla
+    public void agregarFila(Object[] objetos) {
+        // Agrega una fila con los objetos al modelo de la tabla
+        model.addRow(objetos);
+        // Llenar la tabla con datos de la lista
     }
 
     public void panelContenedor() {

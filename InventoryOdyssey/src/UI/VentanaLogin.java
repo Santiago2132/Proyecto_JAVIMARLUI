@@ -10,8 +10,9 @@ import java.awt.font.TextAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VentanaLogin extends JFrame {
+public class VentanaLogin extends JFrame{
     ControlDeAcceso controlDeAcceso = new ControlDeAcceso();
+
     public static void main(String[] args) {
         VentanaLogin ventanaLogin=new VentanaLogin();
         ventanaLogin.setVisible(true);
@@ -125,7 +126,6 @@ public class VentanaLogin extends JFrame {
         panelFondoInfo.add(botonLogin);
 
         botonLogin.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombre = cajaUsuario.getText();
@@ -141,10 +141,6 @@ public class VentanaLogin extends JFrame {
                             VentanaFactura ventanaFactura = new VentanaFactura();
                             ventanaFactura.setVisible(true);
                             dispose();
-                        }else if(rol ==3 ){
-
-                        }else {
-
                         }
                     }else {
                         cajaUsuario.setText(""); // Esto limpia el campo de texto
@@ -153,7 +149,6 @@ public class VentanaLogin extends JFrame {
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-
             }
         });
     }
@@ -183,7 +178,6 @@ public class VentanaLogin extends JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         Font fontSubrayado = new Font(attributes);
         titulo.setFont(fontSubrayado);
-
     }
 
     public void panelContenedor(){

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class UsuarioModel {
     public static BaseDatos conexion = new BaseDatos();
-    private Encriptador encriptador = new Encriptador();
+    public Encriptador encriptador = new Encriptador();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
     public static String mysql;
@@ -24,7 +24,10 @@ public class UsuarioModel {
 
     /*MÉTODOS*/
 
-    public int agregarUsuario(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol){
+    public int agregarUsuario(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) throws Exception {
+        String passwordEncrip = encriptador.encriptar(contrasena);
+        contrasena=passwordEncrip;
+        System.out.println(contrasena);
         int resultado = 0;
         Connection conexion = null;
         //String query = "INSERT INTO USUARIO (ID_USUARIO, INVENTARIO_ID_INVENTARIO, NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -170,7 +173,7 @@ public class UsuarioModel {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         UsuarioModel usuario = new UsuarioModel();
         int resultadoAgregar = usuario.agregarUsuario("Patricia", "patty", "patty", "correo@example.com", 1);
         //int resultadoEliminar = usuario.eliminarUsuarioPorNombreCompleto("Patricia");

@@ -21,20 +21,20 @@ public class Usuario {
 
     /*MÉTODOS*/
 
-    public int agregarUsuario(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol){
+    public int agregarUsuario(int idUsuario, String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol){
         int resultado = 0;
         Connection conexion = null;
-        //String query = "INSERT INTO USUARIO (ID_USUARIO, INVENTARIO_ID_INVENTARIO, NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        String query = "INSERT INTO USUARIO (NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO USUARIO (ID_USUARIO, NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?)";
         try{
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
             //pstmt.setInt(2, inventarioId);
-            pstmt.setString(1, nombreCompleto);
-            pstmt.setString(2, nombreUsuario);
-            pstmt.setString(3, contrasena);
-            pstmt.setString(4, email);
-            pstmt.setInt(5, rol);
+            pstmt.setInt(1, idUsuario);
+            pstmt.setString(2, nombreCompleto);
+            pstmt.setString(3, nombreUsuario);
+            pstmt.setString(4, contrasena);
+            pstmt.setString(5, email);
+            pstmt.setInt(6, rol);
             resultado = pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Usuario agregado correctamente.");
             pstmt.close();
@@ -119,7 +119,7 @@ public class Usuario {
 
     public static void main(String[] args) {
         Usuario usuario = new Usuario();
-        int resultadoAgregar = usuario.agregarUsuario("Patricia", "patty", "patty", "correo@example.com", 1);
+        int resultadoAgregar = usuario.agregarUsuario(1098631845,"Patricia", "patty", "patty", "correo@example.com", 1);
         //int resultadoEliminar = usuario.eliminarUsuarioPorNombreCompleto("Patricia");
         //int resultadoModificar = usuario.modificarUsuario("Patricia", "Patty", "Patty", "patricia@gmail.com", 1);
         //boolean usuarioValido = usuario.validarUsuario("Patty", "Patty");

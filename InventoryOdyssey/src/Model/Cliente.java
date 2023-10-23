@@ -45,15 +45,15 @@ public class Cliente {
         return resultado;
     }
 
-    public int eliminarCliente(int idCliente) {
+    public int eliminarCliente(int identificacion) {
         Connection conexion = null;
         PreparedStatement pstmt = null;
         int resultado = 0;
-        String query = "DELETE FROM CLIENTE WHERE ID_CLIENTE = ?";
+        String query = "DELETE FROM CLIENTE WHERE IDENTIFICACION = ?";
         try {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
-            pstmt.setInt(1, idCliente);
+            pstmt.setInt(1, identificacion);
             resultado = pstmt.executeUpdate();
             if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
@@ -109,7 +109,7 @@ public class Cliente {
     public static void main (String[] args){
         Cliente cliente = new Cliente();
         int resultadoAgregar = cliente.agregarCliente("Santiago", "109861459", "Callejuelas", "3152467894", "santiago@gmail.com");
-        //int resultadoEliminar = cliente.eliminarCliente(1);
+        //int resultadoEliminar = cliente.eliminarCliente(109861459);
         //int resultadoModificar = cliente.modificarCliente(1, "Santiago Maldonado","109861449", "Callejuelas Apto", "3152567894", "santiagoM@gmail.com" );
     }
 }

@@ -1,5 +1,11 @@
 package Model;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,26 +16,60 @@ public class Inventario {
     public static ResultSet resultado;
     public static String mysql;
 
+    public static Blob obtenerImagen(String rutaImagen) throws IOException, SQLException {
+        BufferedImage imagen = ImageIO.read(new File(rutaImagen));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(imagen, "jpg", baos);
+        baos.flush();
+        byte[] bytesDeImagen = baos.toByteArray();
+        baos.close();
+        // Convierte el array de bytes en un objeto Blob
+        Blob imagenBlob = new SerialBlob(bytesDeImagen);
+        return imagenBlob;
+    }
+
     /*MÉTODOS*/
 
-    public int agregarEnInventario(int productoId, int proveedorId,String nombre, String categoria, int cantidadStock, double precioCompra, String descripcion) {
-        int resultado = 0;
+    public int agregarEnInventario(int idProveedor, int idProducto, String nombre, Blob imagen, String categoria, int cantidadStock, double precioCompra, double precioVenta, double iva, String descripcion) {
         Connection conexion = null;
-        String query = "INSERT INTO INVENTARIO (PRODUCTO_ID_PRODUCTO, PROVEEDOR_ID_PROVEEDOR, NOMBRE, CATEGORIA, CANTIDAD_STOCK, PRECIO_COMPRA, DESCRIPCION) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement pstmt = null;
+        int resultado = -1;  // Valor por defecto en caso de fallo
+        String query = "INSERT INTO INVENTARIO (PROVEEDOR_ID_PROVEEDOR, ID_PRODUCTO, NOMBRE, IMAGEN, CATEGORIA, CANTIDAD_STOCK, PRECIO_COMPRA, PRECIO_VENTA, IVA, DESCRIPCION) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             conexion = BaseDatos.getConnection();
-            pstmt = conexion.prepareStatement(query);
-            pstmt.setInt(1, productoId);
-            pstmt.setInt(2, proveedorId);
+            pstmt = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, idProveedor);
+            pstmt.setInt(2, idProducto);
             pstmt.setString(3, nombre);
-            pstmt.setString(4, categoria);
-            pstmt.setInt(5, cantidadStock);
-            pstmt.setDouble(6, precioCompra);
-            pstmt.setString(7, descripcion);
-            resultado = pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Producto agregado correctamente.");
+            pstmt.setBlob(4, imagen);
+            pstmt.setString(5, categoria);
+            pstmt.setInt(6, cantidadStock);
+            pstmt.setDouble(7, precioCompra);
+            pstmt.setDouble(8, precioVenta);
+            pstmt.setDouble(9, iva);
+            pstmt.setString(10, descripcion);
+
+            int filasAfectadas = pstmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Inventario agregado correctamente.");
+                // Obtener el ID de inventario recién insertado
+                ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    resultado = generatedKeys.getInt(1);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo agregar el inventario.");
+            }
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conexion != null) conexion.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return resultado;
     }
@@ -162,9 +202,11 @@ public class Inventario {
         return informacionInventario;
     }
 
-    public static void main (String[] args){
+    public static void main (String[] args) throws SQLException, IOException {
+        String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
+        Blob imagen = obtenerImagen(rutaImagen);
         Inventario inventario = new Inventario();
-        int resultadoAgregar = inventario.agregarEnInventario(1, 1, "Puntilla", "Tornillos y adhesivos", 10, 15.00, "Puntilla Con Cabeza 3pg 500g" );
+        int resultadoAgregar = inventario.agregarEnInventario(1, 1, "Puntilla", imagen, "Tornillos y adhesivos", 10, 15.00, 30.00, 0.19, "Puntilla Con Cabeza 3pg 500g" );
         //int resultadoEliminar = inventario.eliminarDeInventario(1);
         //int resultadoModificar = inventario.modificarEnInventario(1, 9, 75.00);
 

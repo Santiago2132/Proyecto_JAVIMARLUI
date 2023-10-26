@@ -56,6 +56,8 @@ public class VentanaInventario extends JFrame {
         titulo.setForeground(Color.WHITE);
         panelInventario.add(titulo);
 
+
+
         JLabel idProducto = new JLabel("ID:");
         idProducto.setFont(new Font("Rockwell",Font.BOLD,20));
         idProducto.setBounds(65,260,150,20);
@@ -71,6 +73,8 @@ public class VentanaInventario extends JFrame {
         nombreProducto.setBounds(65,310,150,20);
         nombreProducto.setForeground(Color.WHITE);
         panelInventario.add(nombreProducto);
+
+
 
         JTextField cajaNomPro = new JTextField();
         cajaNomPro.setBounds(255,310,220,25);
@@ -195,7 +199,7 @@ public class VentanaInventario extends JFrame {
             }
         });
 
-
+        /*
         JButton botonAggPro = new JButton("AGREGAR PRODUCTO");
         botonAggPro.setBounds(50,24,170,40);
         botonAggPro.setBackground(Color.WHITE);
@@ -210,6 +214,8 @@ public class VentanaInventario extends JFrame {
                 dispose();
             }
         });
+        
+         */
 
 
         JButton botonDelEmpleado = new JButton("EMPLEADOS");

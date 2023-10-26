@@ -54,38 +54,6 @@ public class ProductoModel {
             System.out.println(e);
         }
         return resultado;
-    }public boolean agregarProducto(double precio, int cantidad, double iva) {
-        boolean resultado = false;
-        Connection conexion = null;
-        String query = "INSERT INTO PRODUCTO (PRECIO, CANTIDAD, IMAGEN, IVA) VALUES (?, ?, ?, ?)";
-        try {
-            conexion = BaseDatos.getConnection();
-            PreparedStatement pstmt = conexion.prepareStatement(query);
-            pstmt.setDouble(1, precio);
-            pstmt.setInt(2, cantidad);
-            // Obtener la imagen desde una ruta predeterminada en caso de que no esté disponible
-            String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
-            Blob imagen = obtenerImagen(rutaImagen);
-            pstmt.setBlob(3, imagen);
-            pstmt.setDouble(4, iva);
-            int filasAfectadas = pstmt.executeUpdate();
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
-                resultado = true;
-            }
-            pstmt.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            if (conexion != null) {
-                try {
-                    conexion.close();
-                } catch (SQLException e) {
-                    System.out.println("Error al cerrar la conexión: " + e.getMessage());
-                }
-            }
-        }
-        return resultado;
     }
 
     public int eliminarProducto(int idProducto) {

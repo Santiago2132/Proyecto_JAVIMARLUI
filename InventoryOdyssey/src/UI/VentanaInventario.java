@@ -214,7 +214,7 @@ public class VentanaInventario extends JFrame {
                 dispose();
             }
         });
-        
+
          */
 
 

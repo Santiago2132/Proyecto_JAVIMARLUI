@@ -22,103 +22,82 @@ public class ProductoModel {
         incrementar++;
         return incrementar;
     }
-    public static Blob obtenerImagen(String rutaImagen) throws IOException, SQLException {
-        BufferedImage imagen = ImageIO.read(new File(rutaImagen));
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(imagen, "jpg", baos);
-        baos.flush();
-        byte[] bytesDeImagen = baos.toByteArray();
-        baos.close();
-        // Convierte el array de bytes en un objeto Blob
-        Blob imagenBlob = new SerialBlob(bytesDeImagen);
-        return imagenBlob;
-    }
-
-    /*MÉTODOS*/
-
-    public int agregarProducto(double precio, int cantidad, Blob imagen, double iva) {
-        int resultado = 0;
+    public boolean agregarProducto(int idProducto, String nombre, double precio, int cantidad, double iva) {
+        boolean exito = false;
         Connection conexion = null;
-        String query = "INSERT INTO PRODUCTO (PRECIO, CANTIDAD, IMAGEN, IVA) VALUES (?, ?, ?, ?)";
-        try {
-            conexion = BaseDatos.getConnection();
-            pstmt = conexion.prepareStatement(query);
-            pstmt.setDouble(1, precio);
-            pstmt.setInt(2, cantidad);
-            pstmt.setBlob(3, imagen);
-            pstmt.setDouble(4, iva);
-            resultado = pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
-            pstmt.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return resultado;
-    }
-
-    public int eliminarProducto(int idProducto) {
-        int resultado = 0;
-        Connection conexion = null;
-        String query = "DELETE FROM PRODUCTO WHERE ID_PRODUCTO = ?";
+        String query = "INSERT INTO PRODUCTO (ID_PRODUCTO, NOMBRE, PRECIO_VENTA, CANTIDAD, IVA) VALUES (?, ?, ?, ?, ?)";
         try {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
             pstmt.setInt(1, idProducto);
-            resultado = pstmt.executeUpdate();
+            pstmt.setString(2, nombre);
+            pstmt.setDouble(3, precio);
+            pstmt.setInt(4, cantidad);
+            pstmt.setDouble(5, iva);
+            int resultado = pstmt.executeUpdate();
             if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró ningún producto con ese ID.");
+                exito = true;
+                JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
             }
             pstmt.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-        return resultado;
+        return exito;
     }
 
-    //metodo para modificar el producto por precio, el iva, la cantidad, pero que el iva y cantidad sea opcional si el usuario lo desea
-    public int modificarProducto(int idProducto, int nuevaCantidad, double nuevoPrecio, Double nuevoIva) {
-        int resultado = 0;
+    public boolean modificarProducto(int idProducto, double nuevoPrecio, Integer nuevaCantidad, Double nuevoIva) {
+        boolean exito = false;
         Connection conexion = null;
         String query;
-        if (nuevoIva != null) {
-            // Si se proporciona un nuevo valor de IVA, actualiza también el IVA
-            query = "UPDATE PRODUCTO SET PRECIO = ?, CANTIDAD = ?, IVA = ? WHERE ID_PRODUCTO = ?";
+        if (nuevaCantidad != null && nuevoIva != null) {
+            query = "UPDATE PRODUCTO SET PRECIO_VENTA = ?, CANTIDAD = ?, IVA = ? WHERE ID_PRODUCTO = ?";
+        } else if (nuevaCantidad != null) {
+            query = "UPDATE PRODUCTO SET PRECIO_VENTA = ?, CANTIDAD = ? WHERE ID_PRODUCTO = ?";
+        } else if (nuevoIva != null) {
+            query = "UPDATE PRODUCTO SET PRECIO_VENTA = ?, IVA = ? WHERE ID_PRODUCTO = ?";
         } else {
-            // Si no se proporciona un valor de IVA, solo actualiza el precio
-            query = "UPDATE PRODUCTO SET PRECIO = ? WHERE ID_PRODUCTO = ?";
+            query = "UPDATE PRODUCTO SET PRECIO_VENTA = ? WHERE ID_PRODUCTO = ?";
         }
         try {
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
             pstmt.setDouble(1, nuevoPrecio);
-            if (nuevoIva != null) {
+            if (nuevaCantidad != null && nuevoIva != null) {
                 pstmt.setInt(2, nuevaCantidad);
                 pstmt.setDouble(3, nuevoIva);
                 pstmt.setInt(4, idProducto);
+            } else if (nuevaCantidad != null) {
+                pstmt.setInt(2, nuevaCantidad);
+                pstmt.setInt(3, idProducto);
+            } else if (nuevoIva != null) {
+                pstmt.setDouble(2, nuevoIva);
+                pstmt.setInt(3, idProducto);
             } else {
                 pstmt.setInt(2, idProducto);
             }
-            resultado = pstmt.executeUpdate();
+            int resultado = pstmt.executeUpdate();
             if (resultado > 0) {
+                exito = true;
                 JOptionPane.showMessageDialog(null, "Producto modificado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró ningún producto con ese ID.");
             }
             pstmt.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-        return resultado;
+        return exito;
     }
 
-    public static void main (String[] args) throws IOException, SQLException {
-        String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
-        Blob imagen = obtenerImagen(rutaImagen);
-        ProductoModel producto = new ProductoModel();
-        int resultadoAgregar = producto.agregarProducto(19.99, 1, imagen, 0.19);
-        //int resultadoEliminar = producto.eliminarProducto(1);
-        // int resultadoModificar = producto.modificarProducto(1, 2 ,20.00, 0.19);
+
+    public static void main(String[] args) {
+        ProductoModel productoModel = new ProductoModel();
+
+        // Prueba agregarProducto
+        boolean agregado = productoModel.agregarProducto(23,"Producto1", 50.0, 10, 0.12);
+        System.out.println("Producto agregado: " + agregado);
+
+        // Prueba modificarProducto
+        boolean modificado = productoModel.modificarProducto(0, 60.0, null, null);
+        System.out.println("Producto modificado: " + modificado);
     }
 }

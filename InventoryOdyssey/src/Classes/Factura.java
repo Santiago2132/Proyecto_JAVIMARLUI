@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Factura {
-    Date fecha = new Date();
-    String nombreCliente = "";
-    int identificacion = 0;//ID
-    int telefono = 0;
-    String correo = "";
-    String nombreVendedor = "";
-    ArrayList detalleProductos = new ArrayList<Producto>();
-    float valorTotal = 0f;
-    float porcentajeDescuento = 0f;
+    private Date fecha;
+    private String nombreCliente;
+    private int identificacion;
+    private int telefono;
+    private String correo;
+    private String nombreVendedor;
+    private ArrayList<Producto> detalleProductos;
+    private double valorTotal;
+    private double porcentajeDescuento;
 
     public Factura() {
     }
 
-    public Factura(Date fecha, String nombreCliente, int identificacion, int telefono, String correo, String nombreVendedor, ArrayList detalleProductos, float valorTotal, float porcentajeDescuento) {
+    public Factura(Date fecha, String nombreCliente, int identificacion, int telefono, String correo, String nombreVendedor, ArrayList<Producto> detalleProductos, double valorTotal, double porcentajeDescuento) {
         this.fecha = fecha;
         this.nombreCliente = nombreCliente;
         this.identificacion = identificacion;
@@ -29,6 +29,7 @@ public class Factura {
         this.porcentajeDescuento = porcentajeDescuento;
     }
 
+    // Getters y setters
     public Date getFecha() {
         return fecha;
     }
@@ -77,27 +78,27 @@ public class Factura {
         this.nombreVendedor = nombreVendedor;
     }
 
-    public ArrayList getDetalleProductos() {
+    public ArrayList<Producto> getDetalleProductos() {
         return detalleProductos;
     }
 
-    public void setDetalleProductos(ArrayList detalleProductos) {
+    public void setDetalleProductos(ArrayList<Producto> detalleProductos) {
         this.detalleProductos = detalleProductos;
     }
 
-    public float getValorTotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(float valorTotal) {
+    public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public float getPorcentajeDescuento() {
+    public double getPorcentajeDescuento() {
         return porcentajeDescuento;
     }
 
-    public void setPorcentajeDescuento(float porcentajeDescuento) {
+    public void setPorcentajeDescuento(double porcentajeDescuento) {
         this.porcentajeDescuento = porcentajeDescuento;
     }
 }

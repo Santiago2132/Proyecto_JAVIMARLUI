@@ -1,6 +1,4 @@
 package Model;
-import Classes.Producto;
-
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -151,7 +149,7 @@ public class ProductoModel {
         String rutaImagen = "src/UI/IMAGE NOT FOUND.jpg";
         Blob imagen = obtenerImagen(rutaImagen);
         ProductoModel producto = new ProductoModel();
-        boolean resultadoAgregar = producto.agregarProducto(49.99, 20, 0.19);
+        int resultadoAgregar = producto.agregarProducto(19.99, 1, imagen, 0.19);
         //int resultadoEliminar = producto.eliminarProducto(1);
         // int resultadoModificar = producto.modificarProducto(1, 2 ,20.00, 0.19);
     }

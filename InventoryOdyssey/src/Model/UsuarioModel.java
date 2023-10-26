@@ -8,10 +8,10 @@ import javax.swing.JOptionPane;
 
 public class UsuarioModel {
     public static BaseDatos conexion = new BaseDatos();
-    public Encriptador encriptador = new Encriptador();
     public static PreparedStatement pstmt;
     public static ResultSet resultado;
     public static String mysql;
+    Encriptador encriptador = new Encriptador();
 
     //Atributos//
     int incrementar = 0;
@@ -24,23 +24,21 @@ public class UsuarioModel {
 
     /*MÉTODOS*/
 
-    public int agregarUsuario(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) throws Exception {
-        String passwordEncrip = encriptador.encriptar(contrasena);
-        contrasena=passwordEncrip;
-        System.out.println(contrasena);
+    public int agregarUsuario(int idUsuario, String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) throws Exception {
         int resultado = 0;
         Connection conexion = null;
-        //String query = "INSERT INTO USUARIO (ID_USUARIO, INVENTARIO_ID_INVENTARIO, NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        String query = "INSERT INTO USUARIO (NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?)";
+        String password = encriptador.encriptar(contrasena);
+        String query = "INSERT INTO USUARIO (ID_USUARIO, NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?)";
         try{
             conexion = BaseDatos.getConnection();
             pstmt = conexion.prepareStatement(query);
             //pstmt.setInt(2, inventarioId);
-            pstmt.setString(1, nombreCompleto);
-            pstmt.setString(2, nombreUsuario);
-            pstmt.setString(3, contrasena);
-            pstmt.setString(4, email);
-            pstmt.setInt(5, rol);
+            pstmt.setInt(1, idUsuario);
+            pstmt.setString(2, nombreCompleto);
+            pstmt.setString(3, nombreUsuario);
+            pstmt.setString(4, password);
+            pstmt.setString(5, email);
+            pstmt.setInt(6, rol);
             resultado = pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Usuario agregado correctamente.");
             pstmt.close();
@@ -49,35 +47,6 @@ public class UsuarioModel {
         }
         return resultado;
     }
-    public boolean agregarUsuarioT(String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) throws Exception {
-        String passwordEncrip = encriptador.encriptar(contrasena);
-        contrasena=passwordEncrip;
-        System.out.println(contrasena);
-        boolean exito = false;
-        Connection conexion = null;
-        String query = "INSERT INTO USUARIO (NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?)";
-        try {
-            conexion = BaseDatos.getConnection();
-            pstmt = conexion.prepareStatement(query);
-            pstmt.setString(1, nombreCompleto);
-            pstmt.setString(2, nombreUsuario);
-            pstmt.setString(3, contrasena);
-            pstmt.setString(4, email);
-            pstmt.setInt(5, rol);
-            int resultado = pstmt.executeUpdate();
-            if(resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Usuario agregado correctamente.");
-                exito = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo agregar el usuario.");
-            }
-            pstmt.close();
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-        return exito;
-    }
-
 
     public int eliminarUsuarioPorNombreCompleto(String nombreCompleto) {
         int resultado = 0;
@@ -172,10 +141,9 @@ public class UsuarioModel {
         return rol;
     }
 
-
     public static void main(String[] args) throws Exception {
         UsuarioModel usuario = new UsuarioModel();
-        int resultadoAgregar = usuario.agregarUsuario("Patricia", "patty", "patty", "correo@example.com", 1);
+        int resultadoAgregar = usuario.agregarUsuario(1098631845,"Patricia", "patty", "patty", "correo@example.com", 1);
         //int resultadoEliminar = usuario.eliminarUsuarioPorNombreCompleto("Patricia");
         //int resultadoModificar = usuario.modificarUsuario("Patricia", "Patty", "Patty", "patricia@gmail.com", 1);
         //boolean usuarioValido = usuario.validarUsuario("Patty", "Patty");

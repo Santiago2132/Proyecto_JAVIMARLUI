@@ -3,19 +3,44 @@ package Classes;
 import Structures.LinkedList;
 
 public class Proveedor {
-    public String nombreEmpresa = "";
-    public int nit = 0;
-    public LinkedList historial;
-    public LinkedList catalogo;
+    private int idProveedor;
+    private String nombre;
+    private String nombreEmpresa;
+    private int nitEmpresa;
+    private String telefono;
+    private String email;
+    private int tipo;
+
+    // Constructores, getters y setters (omítelos para brevedad)
+
 
     public Proveedor() {
     }
 
-    public Proveedor(String nombreEmpresa, int nit, LinkedList historial, LinkedList catalogo) {
+    public Proveedor(int idProveedor, String nombre, String nombreEmpresa, int nitEmpresa, String telefono, String email, int tipo) {
+        this.idProveedor = idProveedor;
+        this.nombre = nombre;
         this.nombreEmpresa = nombreEmpresa;
-        this.nit = nit;
-        this.historial = historial;
-        this.catalogo = catalogo;
+        this.nitEmpresa = nitEmpresa;
+        this.telefono = telefono;
+        this.email = email;
+        this.tipo = tipo;
+    }
+
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombreEmpresa() {
@@ -26,27 +51,47 @@ public class Proveedor {
         this.nombreEmpresa = nombreEmpresa;
     }
 
-    public int getNit() {
-        return nit;
+    public int getNitEmpresa() {
+        return nitEmpresa;
     }
 
-    public void setNit(int nit) {
-        this.nit = nit;
+    public void setNitEmpresa(int nitEmpresa) {
+        this.nitEmpresa = nitEmpresa;
     }
 
-    public LinkedList getHistorial() {
-        return historial;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setHistorial(LinkedList historial) {
-        this.historial = historial;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public LinkedList getCatalogo() {
-        return catalogo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCatalogo(LinkedList catalogo) {
-        this.catalogo = catalogo;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "ID Proveedor: " + idProveedor +
+                ", Nombre: " + nombre +
+                ", Nombre de Empresa: " + nombreEmpresa +
+                ", NIT de Empresa: " + nitEmpresa +
+                ", Teléfono: " + telefono +
+                ", Email: " + email +
+                ", Tipo: " + tipo;
+    }
+
 }

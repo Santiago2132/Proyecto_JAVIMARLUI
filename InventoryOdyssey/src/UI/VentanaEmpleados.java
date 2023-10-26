@@ -140,6 +140,7 @@ public class VentanaEmpleados extends JFrame {
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelFondo.add(panelConScroll, BorderLayout.CENTER);
+        table.setEnabled(false);
     }
 
     // Método para agregar una fila de objetos a la tabla

@@ -259,6 +259,7 @@ public class Factura extends JFrame {
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelFactura.add(panelConScroll, BorderLayout.CENTER);
+        table.setEnabled(false);
     }
 
     // Método para agregar una fila de objetos a la tabla

@@ -150,10 +150,14 @@ public class VentanaInventario extends JFrame {
 
                 // Agrega el proveedor a la lista
                 listaProductos.add(producto);
+
                 if (productoAgreado){
                     // Agrega el proveeodr a la tabla
                     agregarFila(new Object[]{producto.getCodigo(), producto.getNombreProducto(), producto.getCantidad(), producto.getPrecioUnitario(), producto.getIva()});
                 }
+
+
+
                 // Limpia los JTextField
                 cajaNomPro.setText("");
                 cajaID.setText("");
@@ -204,7 +208,7 @@ public class VentanaInventario extends JFrame {
 
 
         JButton botonProveedores = new JButton("PROVEEDORES");
-        botonProveedores.setBounds(250,24,150,40);
+        botonProveedores.setBounds(50,24,150,40);
         botonProveedores.setBackground(Color.WHITE);
         botonProveedores.setBorderPainted(false);
         panelInvisble.add(botonProveedores);
@@ -218,27 +222,9 @@ public class VentanaInventario extends JFrame {
             }
         });
 
-        /*
-        JButton botonAggPro = new JButton("AGREGAR PRODUCTO");
-        botonAggPro.setBounds(50,24,170,40);
-        botonAggPro.setBackground(Color.WHITE);
-        botonAggPro.setBorderPainted(false);
-        panelInvisble.add(botonAggPro);
-
-        botonAggPro.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VentanaAggProducto ventanaAggProducto = new VentanaAggProducto();
-                ventanaAggProducto.setVisible(true);
-                dispose();
-            }
-        });
-
-         */
-
 
         JButton botonDelEmpleado = new JButton("EMPLEADOS");
-        botonDelEmpleado.setBounds(450,24,180,40);
+        botonDelEmpleado.setBounds(250,24,150,40);
         botonDelEmpleado.setBackground(Color.WHITE);
         botonDelEmpleado.setBorderPainted(false);
         panelInvisble.add(botonDelEmpleado);
@@ -312,7 +298,7 @@ public class VentanaInventario extends JFrame {
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelInventario.add(panelConScroll, BorderLayout.CENTER);
-
+        table.setEnabled(false);
     }
 
     // Método para agregar una fila de objetos a la tabla

@@ -6,13 +6,17 @@ import Model.ProductoModel;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerProductos {
     ProductoModel productoModel = new ProductoModel();
 
-    public boolean crearProductoBasico(double precio, double iva) throws SQLException, IOException {
-        return false;
+    public boolean crearProductoBasico(String nombre,int id,int cantidad,double precio, double iva)  throws SQLException, IOException {
+        return productoModel.agregarProducto(id,nombre,precio,cantidad,iva);
         //productoModel.agregarProducto(precio,iva);
+    }
+    public List<Producto> listaProductos(){
+        return productoModel.obtenerProductos();
     }
 
 
@@ -25,9 +29,5 @@ public class ControllerProductos {
     public Producto consultarProducto(int idProducto) {
 
         return null;
-    }
-    public static void main(String[] args) throws SQLException, IOException {
-        ControllerProductos controllerProductos = new ControllerProductos();
-        controllerProductos.crearProductoBasico(1231231.21,12);
     }
 }

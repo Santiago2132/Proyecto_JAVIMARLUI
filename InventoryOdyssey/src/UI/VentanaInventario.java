@@ -1,5 +1,8 @@
 package UI;
 
+import Controller.ControllerAdministrador;
+import Controller.ControllerProductos;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -9,8 +12,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class VentanaInventario extends JFrame {
@@ -19,6 +25,7 @@ public class VentanaInventario extends JFrame {
         VentanaInventario ventanaInventario = new VentanaInventario();
         ventanaInventario.setVisible(true);
     }
+    ControllerProductos controllerProductos = new ControllerProductos();
 
     JLayeredPane contenedor = new JLayeredPane();
     static JPanel panelInventario = new JPanel();
@@ -40,6 +47,7 @@ public class VentanaInventario extends JFrame {
         panelInventario();
         panelInvisible();
         tablaProductos();
+        rellenoInventario();
     }
 
     public void panelInventario(){
@@ -124,17 +132,28 @@ public class VentanaInventario extends JFrame {
                 String cantidad = cajaCantidad.getText();
                 String precioUnitario = cajaPrecio.getText();
                 String iva = cajaIva.getText();
-
+                int id2 = Integer.parseInt(cajaID.getText());
+                int cantidad2 = Integer.parseInt(cajaCantidad.getText());
+                double precioUnitario2 = Double.parseDouble(cajaPrecio.getText());
+                double iva2 = Double.parseDouble(cajaIva.getText());
+                boolean productoAgreado;
+                try {
+                    productoAgreado = controllerProductos.crearProductoBasico(nombre, id2, cantidad2, precioUnitario2, iva2);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 // Crea un objeto Proveedor con los valores
                 Producto producto = new Producto(id, nombre, cantidad, precioUnitario, iva);
 
                 // Agrega el proveedor a la lista
                 listaProductos.add(producto);
-
-                // Agrega el proveeodr a la tabla
-                agregarFila(new Object[]{producto.getCodigo(), producto.getNombreProducto(), producto.getCantidad(),producto.getPrecioUnitario(),producto.getIva()});
-
+                if (productoAgreado){
+                    // Agrega el proveeodr a la tabla
+                    agregarFila(new Object[]{producto.getCodigo(), producto.getNombreProducto(), producto.getCantidad(), producto.getPrecioUnitario(), producto.getIva()});
+                }
                 // Limpia los JTextField
                 cajaNomPro.setText("");
                 cajaID.setText("");
@@ -293,6 +312,7 @@ public class VentanaInventario extends JFrame {
 
         // Agrega el panel con la barra de desplazamiento al panelCentral
         panelInventario.add(panelConScroll, BorderLayout.CENTER);
+
     }
 
     // Método para agregar una fila de objetos a la tabla
@@ -319,5 +339,18 @@ public class VentanaInventario extends JFrame {
         contenedor.setSize(screenSize);
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+    public void rellenoInventario(){
+        List<Classes.Producto> listaProductos = controllerProductos.listaProductos();
+        for (Classes.Producto producto : listaProductos) {
+            String id = Integer.toString(producto.getIdProducto());
+            String nombre = producto.getNombre();
+            String cantidad = Integer.toString(producto.getCantidad());
+            String iva = Double.toString(producto.getIva());
+            String precio = Double.toString(producto.getPrecioVenta());
+
+            agregarFila(new Object[]{id,nombre, cantidad, precio, iva});
+        }
+
     }
 }

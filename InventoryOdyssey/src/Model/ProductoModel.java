@@ -1,9 +1,13 @@
 package Model;
+import Classes.Producto;
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.JOptionPane;
@@ -42,6 +46,9 @@ public class ProductoModel {
             pstmt.close();
         } catch (Exception e) {
             System.out.println(e);
+        }
+        if (exito==false){
+            JOptionPane.showMessageDialog(null, "Producto no fue agregado correctamente.");
         }
         return exito;
     }
@@ -87,11 +94,35 @@ public class ProductoModel {
         }
         return exito;
     }
+    public List<Producto> obtenerProductos() {
+        List<Producto> productos = new ArrayList<>();
+        Connection conexion = null;
+        String query = "SELECT * FROM PRODUCTO";
+        try {
+            conexion = BaseDatos.getConnection();
+            pstmt = conexion.prepareStatement(query);
+            resultado = pstmt.executeQuery();
+            while (resultado.next()) {
+                Producto producto = new Producto();
+                producto.setIdProducto(resultado.getInt("ID_PRODUCTO"));
+                producto.setNombre(resultado.getString("NOMBRE"));
+                producto.setPrecioVenta(resultado.getDouble("PRECIO_VENTA"));
+                producto.setCantidad(resultado.getInt("CANTIDAD"));
+                producto.setIva(resultado.getDouble("IVA"));
+                productos.add(producto);
+            }
+            resultado.close();
+            pstmt.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return productos;
+    }
 
 
     public static void main(String[] args) {
         ProductoModel productoModel = new ProductoModel();
-
+        /*
         // Prueba agregarProducto
         boolean agregado = productoModel.agregarProducto(23,"Producto1", 50.0, 10, 0.12);
         System.out.println("Producto agregado: " + agregado);
@@ -99,5 +130,12 @@ public class ProductoModel {
         // Prueba modificarProducto
         boolean modificado = productoModel.modificarProducto(0, 60.0, null, null);
         System.out.println("Producto modificado: " + modificado);
+
+         */
+
+        List<Producto> productos = productoModel.obtenerProductos();
+        for (Producto producto : productos) {
+            System.out.println(producto);
+        }
     }
 }

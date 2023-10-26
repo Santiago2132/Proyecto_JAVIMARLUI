@@ -10,6 +10,7 @@ public class Producto {
     String descripcion = "";
     int garantiaMeses = 0; //Depende del producto
     int cantidad = 0;
+    double iva = 0;
 
     public Producto() {
     }
@@ -87,5 +88,13 @@ public class Producto {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
     }
 }

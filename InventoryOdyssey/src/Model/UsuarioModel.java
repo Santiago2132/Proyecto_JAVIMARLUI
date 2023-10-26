@@ -1,9 +1,12 @@
 package Model;
+import Classes.UserM;
 import Security.Encriptador;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class UsuarioModel {
@@ -46,6 +49,31 @@ public class UsuarioModel {
             System.out.println(e);
         }
         return resultado;
+    }
+    public boolean agregarUser(int idUsuario, String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) throws Exception {
+        boolean exito = false;
+        Connection conexion = null;
+        String password = encriptador.encriptar(contrasena);
+        String query = "INSERT INTO USUARIO (ID_USUARIO, NOMBRE_COMPLETO, NOMBRE_USUARIO, CONTRASENA, EMAIL, ROL) VALUES (?, ?, ?, ?, ?, ?)";
+        try{
+            conexion = BaseDatos.getConnection();
+            pstmt = conexion.prepareStatement(query);
+            pstmt.setInt(1, idUsuario);
+            pstmt.setString(2, nombreCompleto);
+            pstmt.setString(3, nombreUsuario);
+            pstmt.setString(4, password);
+            pstmt.setString(5, email);
+            pstmt.setInt(6, rol);
+            int resultado = pstmt.executeUpdate();
+            if(resultado > 0) {
+                exito = true;
+                JOptionPane.showMessageDialog(null, "Usuario agregado correctamente.");
+            }
+            pstmt.close();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return exito;
     }
 
     public int eliminarUsuarioPorNombreCompleto(String nombreCompleto) {
@@ -140,10 +168,56 @@ public class UsuarioModel {
         }
         return rol;
     }
+    public List<UserM> obtenerUsuarios() {
+        List<UserM> usuarios = new ArrayList<>();
+        Connection conexion = null;
+        String query = "SELECT * FROM USUARIO";
+        try {
+            conexion = BaseDatos.getConnection();
+            pstmt = conexion.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                UserM usuario = new UserM();
+                usuario.setIdUsuario(rs.getInt("ID_USUARIO"));
+                usuario.setNombreCompleto(rs.getString("NOMBRE_COMPLETO"));
+                usuario.setNombreUsuario(rs.getString("NOMBRE_USUARIO"));
+                usuario.setContrasena(rs.getString("CONTRASENA"));
+                usuario.setEmail(rs.getString("EMAIL"));
+                usuario.setRol(rs.getInt("ROL"));
+                usuarios.add(usuario);
+            }
+            rs.close();
+            pstmt.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return usuarios;
+    }
+
 
     public static void main(String[] args) throws Exception {
-        UsuarioModel usuario = new UsuarioModel();
-        int resultadoAgregar = usuario.agregarUsuario(1098631845,"Patricia", "patty", "patty", "correo@example.com", 1);
+        UserM user = new UserM();  // Instancia de UserM
+        UsuarioModel usuarioModel = new UsuarioModel();
+
+        try {
+            List<UserM> users = usuarioModel.obtenerUsuarios();  // Obtener lista de UserM
+
+            for (UserM u : users) {
+                System.out.println("ID Usuario: " + u.getIdUsuario());
+                System.out.println("Nombre Completo: " + u.getNombreCompleto());
+                System.out.println("Nombre de Usuario: " + u.getNombreUsuario());
+                System.out.println("Contraseña: " + u.getContrasena());
+                System.out.println("Email: " + u.getEmail());
+                System.out.println("Rol: " + u.getRol());
+                System.out.println("--------------------");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener usuarios: " + e.getMessage());
+        }
+
+        //int resultadoAgregar = usuario.agregarUsuario(109812312,"santi", "santi", "santi", "correo@example.com", 1);
+        //int resultadoAgregar = usuario.agregarUsuario(1098631845,"Patricia", "patty", "patty", "correo@example.com", 1);
         //int resultadoEliminar = usuario.eliminarUsuarioPorNombreCompleto("Patricia");
         //int resultadoModificar = usuario.modificarUsuario("Patricia", "Patty", "Patty", "patricia@gmail.com", 1);
         //boolean usuarioValido = usuario.validarUsuario("Patty", "Patty");

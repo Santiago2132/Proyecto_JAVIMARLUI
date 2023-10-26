@@ -15,9 +15,20 @@ public class ControllerAdministrador {
     public boolean crearUsuario(String nombre,String nombreUsuario,String password, String correo, int rol) throws Exception {//Funciones con usuario
 
         return usuarioModel.agregarUsuarioT(nombre,nombreUsuario,password,correo,rol);
+        int resultadoAgregar = usuario.agregarUsuario(1098631845,"Patricia", "patty", "patty", "correo@example.com", 1);
     }
 
      */
+    public boolean crearUsuario(int ID, String nombre,String nombreUsuario,String password, String correo, int rol) throws Exception {
+        String nameUser = toString(ID);
+        return usuarioModel.agregarUser(ID,nombre,nombreUsuario, password,correo,rol);
+    }
+
+    private String toString(int id) {
+        return Integer.toString(id);
+    }
+
+
     public boolean eliminarUsuario(Usuario usuarioAEliminar){
         boolean eliminado = false;//falta la consulta 3 condicionales que dependen del modelo
         eliminado = true;
@@ -27,7 +38,7 @@ public class ControllerAdministrador {
         Usuario usuarioConsultado = new Usuario();//Falta la conulta
         return usuarioConsultado;
     }
-    public boolean modificarUsuario(){
+    public boolean modificarUsuario(){//Falta por hacer vida puta
         return false;
     }
     public LinkedList estadoInventario(){//Inventario y Producto

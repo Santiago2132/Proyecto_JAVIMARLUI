@@ -29,10 +29,8 @@ public class ControllerAdministrador {
     }
 
 
-    public boolean eliminarUsuario(Usuario usuarioAEliminar){
-        boolean eliminado = false;//falta la consulta 3 condicionales que dependen del modelo
-        eliminado = true;
-        return false;
+    public boolean eliminarUsuario(int id){
+        return usuarioModel.eliminarUsuarioPorID(id);
     }
     public Usuario consultaUsuario(String nombre){
         Usuario usuarioConsultado = new Usuario();//Falta la conulta

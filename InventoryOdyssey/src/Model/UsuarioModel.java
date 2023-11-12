@@ -26,6 +26,28 @@ public class UsuarioModel {
     }
 
     /*MÉTODOS*/
+    public boolean eliminarUsuarioPorID(int idUsuario) {
+        boolean exito = false;
+        Connection conexion = null;
+        String query = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
+        try {
+            conexion = BaseDatos.getConnection();
+            pstmt = conexion.prepareStatement(query);
+            pstmt.setInt(1, idUsuario);
+            int resultado = pstmt.executeUpdate();
+            if (resultado > 0) {
+                exito = true;
+                JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró ningún usuario con ese ID.");
+            }
+            pstmt.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return exito;
+    }
+
 
     public int agregarUsuario(int idUsuario, String nombreCompleto, String nombreUsuario, String contrasena, String email, int rol) throws Exception {
         int resultado = 0;

@@ -1,5 +1,10 @@
 package UI;
 
+import Classes.Producto;
+import Classes.UserM;
+import Classes.Usuario;
+import Controller.ControllerAdministrador;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -11,9 +16,11 @@ import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class VentanaEmpleados extends JFrame {
+    ControllerAdministrador controllerAdministrador = new ControllerAdministrador();
     public static void main (String []args){
         VentanaEmpleados ventanaDelEmpleado = new VentanaEmpleados();
         ventanaDelEmpleado.setVisible(true);
@@ -149,6 +156,21 @@ public class VentanaEmpleados extends JFrame {
         model.addRow(objetos);
         // Llenar la tabla con datos de la lista
     }
+    /*
+    public void rellenoInventario(){
+        List<UserM> listaEmpleados = controllerAdministrador.empleados();
+        for (UserM empleado : listaEmpleados) {
+            String id = Integer.toString(empleado.getIdUsuario());
+            String nombre = empleado.getNombre();
+            String telefono = Integer.toString(empleado.get);
+            String email = empleado.getEmail();
+
+            agregarFila(new Object[]{id, nombre, telefono, email});
+        }
+    }
+
+     */
+
 
     private void eliminarFilaPorId(String id) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
